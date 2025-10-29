@@ -68,9 +68,9 @@ export default function Hero() {
         {/* Phones & Notifications */}
         <div className="relative w-full max-w-[1600px] aspect-[16/9] sm:aspect-[3/2] md:aspect-[5/3] lg:aspect-[16/7] overflow-hidden">
           {/* Phones */}
-          <div className="absolute inset-0 flex justify-center items-end scale-[0.9] sm:scale-[0.95] md:scale-[1] z-10 pb-[1%] h-[103%] md:h-[88%]" style={{ overflow: 'hidden' }}>
+          <div className="absolute inset-0 flex justify-center items-end scale-[0.9] sm:scale-[0.95] md:scale-[1] z-10 pb-[1%] h-[103%] md:h-[90%] lg:h-[88%]" style={{ overflow: 'hidden' }}>
             {/* Left Phone */}
-            <div className="relative w-[30%] max-w-[260px] sm:max-w-[280px] md:max-w-[340px] lg:max-w-[420px] h-full translate-y-[4%] md:translate-y-[6.4%] -mr-[10%] sm:-mr-[8%] md:-mr-[10%]">
+            <div className="relative w-[30%] max-w-[260px] sm:max-w-[280px] md:max-w-[320px] lg:max-w-[420px] h-full translate-y-[4%] md:translate-y-[5%] lg:translate-y-[6.4%] -mr-[10%] sm:-mr-[8%] md:-mr-[8%] lg:-mr-[10%]">
               <Image
                 src="/psd_black_smartphone_with_blank_screen_isolated 5.png"
                 alt="Phone Left"
@@ -80,7 +80,7 @@ export default function Hero() {
             </div>
 
             {/* Center Phone */}
-            <div className="relative w-[40%] max-w-[440px] sm:max-w-[480px] md:max-w-[540px] lg:max-w-[600px] z-10 -translate-y-[12%] sm:-translate-y-[8%] h-full">
+            <div className="relative w-[40%] max-w-[440px] sm:max-w-[480px] md:max-w-[520px] lg:max-w-[600px] z-10 -translate-y-[12%] sm:-translate-y-[8%] md:-translate-y-[6%] lg:-translate-y-[8%] h-full">
               <Image
                 src="/psd_black_smartphone_with_blank_screen_isolated 1.png"
                 alt="Phone Center"
@@ -91,7 +91,7 @@ export default function Hero() {
             </div>
 
             {/* Right Phone */}
-            <div className="relative w-[28%] max-w-[260px] sm:max-w-[280px] md:max-w-[340px] lg:max-w-[420px] h-full translate-y-[4%] md:translate-y-[5%] -ml-[10%] sm:-ml-[10%] md:-ml-[12%]">
+            <div className="relative w-[28%] max-w-[260px] sm:max-w-[280px] md:max-w-[320px] lg:max-w-[420px] h-full translate-y-[4%] md:translate-y-[5%] lg:translate-y-[5%] -ml-[10%] sm:-ml-[10%] md:-ml-[10%] lg:-ml-[12%]">
               <Image
                 src="/psd_black_smartphone_with_blank_screen_isolated 2.png"
                 alt="Phone Right"

@@ -29,3 +29,10 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Media query for 918px width tablets */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .your-trips-container-918 {
+    height: 450px !important;
+  }
+}

@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono, Manrope, Poppins, Inter } from "next/font/google";
+import { Geist, Geist_Mono, Manrope, Poppins, Inter, Manjari } from "next/font/google";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -30,6 +30,12 @@ const inter = Inter({
   weight: ["400", "700"],
 });
 
+const manjari = Manjari({
+  variable: "--font-manjari",
+  subsets: ["latin"],
+  weight: ["100", "400", "700"],
+});
+
 export const metadata: Metadata = {
   title: "OVU",
   description: "OVU",
@@ -48,7 +54,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${manrope.variable} ${poppins.variable} ${inter.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${manrope.variable} ${poppins.variable} ${inter.variable} ${manjari.variable} antialiased`}
         suppressHydrationWarning
       >
         {children}

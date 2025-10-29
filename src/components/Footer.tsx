@@ -25,14 +25,26 @@ const Footer = () => {
         <div className="max-w-[1728px] mx-auto">
           {/* Logo */}
           <div className="flex justify-center mb-8 md:mb-10">
-            <Link href="/" className="flex items-center">
+            <Link href="/" className="flex items-center gap-1.5 md:gap-2">
               <Image 
-                src="/logo.png" 
-                alt="OVU logo" 
-                width={120} 
-                height={114}
-                className="w-[80px] md:w-[100px] lg:w-[120px] h-auto"
+                src="/bird.png" 
+                alt="OVU Logo" 
+                width={42} 
+                height={36}
+                className="w-[28px] h-[24px] md:w-[35px] md:h-[30px] xl:w-[42px] xl:h-[36px] object-contain"
               />
+              <span 
+                className="font-bold text-white text-[20px] md:text-[25px] xl:text-[30px]"
+                style={{
+                  fontFamily: 'Arial, sans-serif',
+                  fontWeight: 700,
+                  lineHeight: '100%',
+                  letterSpacing: '0.1em',
+                  textAlign: 'left'
+                }}
+              >
+                OVU
+              </span>
             </Link>
           </div>
 

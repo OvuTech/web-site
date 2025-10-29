@@ -2,19 +2,19 @@ import Image from 'next/image';
 
 export default function YourTrips() {
   return (
-    <section className="bg-[#065888] relative mt-[100px]s">
+    <section className="bg-[#065888] relative mt-[100px] pt-12 md:pt-14 lg:pt-16">
       <div className="w-full relative z-10">
         {/* Heading */}
-        <div className="text-center my-8 md:my-10 lg:my-12">
-          <h2 className="font-normal text-[28px] md:text-[36px] lg:text-[48px] text-white">
+        <div className="text-center mb-12 md:mb-14 lg:mb-16">
+          <h2 className="font-manjari font-[100] text-[22px] md:text-[36px] lg:text-[48px] text-white leading-none tracking-normal">
             Your trips, simplified.
           </h2>
         </div>
 
         {/* Phone Mockups Container */}
-        <div className="relative w-full h-[500px] md:h-[700px] lg:h-[950px] max-w-[1728px] mx-auto -mt-8 md:-mt-12 lg:-mt-16">
+        <div className="relative w-full h-[355px] md:h-[547px] lg:h-[950px] max-w-[1728px] mx-auto -mt-8 md:-mt-12 lg:-mt-16 your-trips-container-918">
           {/* First Phone */}
-          <div className="absolute top-0 left-[34px] w-[545px] h-[823px] hidden lg:block">
+          <div className="absolute top-[57px] left-[11px] md:left-[5%] md:top-[80px] lg:left-[34px] lg:top-[0px] w-[162px] md:w-[160px] lg:w-[545px] h-[245px] md:h-[260px] lg:h-[823px]">
             <Image 
               src="/phone.png" 
               alt="Phone mockup" 
@@ -25,7 +25,7 @@ export default function YourTrips() {
           </div>
 
           {/* Second Phone */}
-          <div className="absolute top-0 left-[20%] md:top-[40px] md:left-[25%] lg:top-[80px] lg:left-[510px] w-[200px] md:w-[350px] lg:w-[545px] h-auto lg:h-[823px]">
+          <div className="absolute top-[110px] left-[152px] md:left-[28%] md:top-[60px] lg:left-[510px] lg:top-[80px] w-[163px] md:w-[160px] lg:w-[545px] h-[245px] md:h-[260px] lg:h-[823px]">
             <Image 
               src="/phone.png" 
               alt="Phone mockup" 
@@ -36,7 +36,7 @@ export default function YourTrips() {
           </div>
 
           {/* Third Phone */}
-          <div className="absolute top-[30px] right-[20%] md:top-[60px] md:right-[25%] lg:top-[40px] lg:left-[986px] w-[200px] md:w-[350px] lg:w-[545px] h-auto lg:h-[823px]">
+          <div className="absolute top-[79px] left-[294px] md:left-[51%] md:top-[40px] lg:left-[986px] lg:top-[40px] w-[162px] md:w-[160px] lg:w-[545px] h-[244px] md:h-[260px] lg:h-[823px]">
             <Image 
               src="/phone.png" 
               alt="Phone mockup" 
@@ -47,7 +47,7 @@ export default function YourTrips() {
           </div>
 
           {/* Fourth Phone */}
-          <div className="absolute top-[60px] left-[1417px] w-[545px] h-[823px] hidden xl:block">
+          <div className="absolute top-[79px] left-[294px] md:left-[74%] md:top-[80px] lg:left-[1417px] lg:top-[60px] w-[162px] md:w-[160px] lg:w-[545px] h-[244px] md:h-[260px] lg:h-[823px] hidden md:block">
             <Image 
               src="/phone.png" 
               alt="Phone mockup" 
