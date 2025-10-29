@@ -68,9 +68,9 @@ export default function Hero() {
         {/* Phones & Notifications */}
         <div className="relative w-full max-w-[1600px] aspect-[16/9] sm:aspect-[3/2] md:aspect-[5/3] lg:aspect-[16/7] overflow-hidden">
           {/* Phones */}
-          <div className="absolute inset-0 flex justify-center items-end scale-[0.9] sm:scale-[0.95] md:scale-[1] z-10 pb-[1%]" style={{ overflow: 'hidden', height: '88%' }}>
+          <div className="absolute inset-0 flex justify-center items-end scale-[0.9] sm:scale-[0.95] md:scale-[1] z-10 pb-[1%] h-[103%] md:h-[88%]" style={{ overflow: 'hidden' }}>
             {/* Left Phone */}
-            <div className="relative w-[30%] max-w-[260px] sm:max-w-[280px] md:max-w-[340px] lg:max-w-[420px] h-full translate-y-[4%] md:translate-y-0 -mr-[10%] sm:-mr-[8%] md:-mr-[10%]">
+            <div className="relative w-[30%] max-w-[260px] sm:max-w-[280px] md:max-w-[340px] lg:max-w-[420px] h-full translate-y-[4%] md:translate-y-[6.4%] -mr-[10%] sm:-mr-[8%] md:-mr-[10%]">
               <Image
                 src="/psd_black_smartphone_with_blank_screen_isolated 5.png"
                 alt="Phone Left"
@@ -91,7 +91,7 @@ export default function Hero() {
             </div>
 
             {/* Right Phone */}
-            <div className="relative w-[30%] max-w-[260px] sm:max-w-[280px] md:max-w-[340px] lg:max-w-[420px] h-full translate-y-[4%] md:translate-y-0 -ml-[10%] sm:-ml-[10%] md:-ml-[12%]">
+            <div className="relative w-[28%] max-w-[260px] sm:max-w-[280px] md:max-w-[340px] lg:max-w-[420px] h-full translate-y-[4%] md:translate-y-[5%] -ml-[10%] sm:-ml-[10%] md:-ml-[12%]">
               <Image
                 src="/psd_black_smartphone_with_blank_screen_isolated 2.png"
                 alt="Phone Right"
@@ -103,9 +103,9 @@ export default function Hero() {
 
           {/* Notifications */}
           {/* Left */}
-          <div className="absolute left-[10%] sm:left-[15%] top-[10%] sm:top-[8%] flex items-center gap-2 z-20">
+          <div className="absolute left-[-16%] sm:left-[15%] top-[24%] sm:top-[8%] flex items-center gap-2 z-20">
             <div className="text-right leading-tight">
-              <p className="font-manrope font-semibold text-[12px] sm:text-[14px] text-[#303030]">
+              <p className="font-manrope font-semibold text-[8px] sm:text-[14px] text-[#303030]">
                 1 new notification
               </p>
               <p className="font-manrope text-[11px] sm:text-[12px] text-[#464646]">
@@ -116,13 +116,13 @@ export default function Hero() {
           </div>
 
           {/* Right */}
-          <div className="absolute right-[10%] sm:right-[15%] top-[14%] sm:top-[12%] flex items-center gap-2 z-20">
+          <div className="absolute right-[-18%] sm:right-[15%] top-[25%] sm:top-[12%] flex items-center gap-2 z-20">
             <Image src="/yellow_alarm.png" alt="Bell" width={20} height={20} />
             <div className="leading-tight">
-              <p className="font-manrope font-semibold text-[12px] sm:text-[14px] text-[#303030]">
+              <p className="font-manrope font-semibold text-[8px] sm:text-[14px] text-[#303030]">
                 1 new notification
               </p>
-              <p className="font-manrope text-[11px] sm:text-[12px] text-[#464646]">
+              <p className="font-manrope text-[10px] sm:text-[12px] text-[#464646]">
                 Download your ticket for flight MDXC6...
               </p>
             </div>
@@ -130,7 +130,7 @@ export default function Hero() {
         </div>
 
         {/* Bottom curved overlay - full width, breaks out of padding */}
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-screen z-30 sm:bottom-auto sm:top-[75.9%] pointer-events-none">
+        <div className="absolute bottom-[-10px] left-1/2 -translate-x-1/2 w-screen z-30 sm:bottom-auto sm:top-[calc(75.9%-10px)] pointer-events-none">
             <Image
               src="/rounded.png"
               alt="Curve"
