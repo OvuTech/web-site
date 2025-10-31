@@ -132,7 +132,7 @@ export default function GrowWithOVU() {
 
             {/* Right Column - Application Form */}
             <div className="flex-1">
-              <div className="bg-[#F6FCFF] md:bg-white md:border md:border-gray-200 rounded-[20px] md:p-8 md:shadow-md">
+              <div className="bg-[#F6FCFF] md:bg-white md:border md:border-gray-200 rounded-[20px] p-6 md:py-[57px] md:px-[77px] md:shadow-md">
                 <form onSubmit={handleSubmit} className="space-y-5 md:space-y-6">
                   {/* Company Name */}
                   <div>
@@ -146,7 +146,7 @@ export default function GrowWithOVU() {
                       value={formData.companyName}
                       onChange={handleChange}
                       placeholder="Type here"
-                      className="w-full h-[45px] px-4 py-3 rounded-[10px] text-[#303030] placeholder:text-gray-400 focus:outline-none focus:border-[#065888] focus:ring-2 focus:ring-[#065888]/20 transition font-manrope"
+                      className="w-full md:w-[474px] h-[45px] md:h-[60px] px-4 py-3 rounded-[10px] text-[#303030] placeholder:text-gray-400 focus:outline-none focus:border-[#065888] focus:ring-2 focus:ring-[#065888]/20 transition font-manrope"
                       style={{ fontFamily: 'var(--font-manrope)', border: '1px solid #B1B1B1', borderWidth: '1px' }}
                       required
                     />
@@ -163,7 +163,7 @@ export default function GrowWithOVU() {
                         name="category"
                         value={formData.category}
                         onChange={handleChange}
-                        className="w-full h-[45px] px-4 py-3 pr-10 rounded-[10px] text-[#303030] focus:outline-none focus:border-[#065888] focus:ring-2 focus:ring-[#065888]/20 transition font-manrope appearance-none"
+                        className="w-full md:w-[474px] h-[45px] md:h-[60px] px-4 py-3 pr-10 rounded-[10px] text-[#303030] focus:outline-none focus:border-[#065888] focus:ring-2 focus:ring-[#065888]/20 transition font-manrope appearance-none"
                         style={{ fontFamily: 'var(--font-manrope)', border: '1px solid #B1B1B1', borderWidth: '1px' }}
                         required
                       >
@@ -193,7 +193,7 @@ export default function GrowWithOVU() {
                       value={formData.phone}
                       onChange={handleChange}
                       placeholder="+234"
-                      className="w-full h-[45px] px-4 py-3 rounded-[10px] text-[#303030] placeholder:text-gray-400 focus:outline-none focus:border-[#065888] focus:ring-2 focus:ring-[#065888]/20 transition font-manrope"
+                      className="w-full md:w-[474px] h-[45px] md:h-[60px] px-4 py-3 rounded-[10px] text-[#303030] placeholder:text-gray-400 focus:outline-none focus:border-[#065888] focus:ring-2 focus:ring-[#065888]/20 transition font-manrope"
                       style={{ fontFamily: 'var(--font-manrope)', border: '1px solid #B1B1B1', borderWidth: '1px' }}
                       required
                     />
@@ -211,7 +211,7 @@ export default function GrowWithOVU() {
                       value={formData.email}
                       onChange={handleChange}
                       placeholder="example@mail.com"
-                      className="w-full h-[45px] px-4 py-3 rounded-[10px] text-[#303030] placeholder:text-gray-400 focus:outline-none focus:border-[#065888] focus:ring-2 focus:ring-[#065888]/20 transition font-manrope"
+                      className="w-full md:w-[474px] h-[45px] md:h-[60px] px-4 py-3 rounded-[10px] text-[#303030] placeholder:text-gray-400 focus:outline-none focus:border-[#065888] focus:ring-2 focus:ring-[#065888]/20 transition font-manrope"
                       style={{ fontFamily: 'var(--font-manrope)', border: '1px solid #B1B1B1', borderWidth: '1px' }}
                       required
                     />
