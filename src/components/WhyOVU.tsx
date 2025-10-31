@@ -30,31 +30,31 @@ interface FeatureCard {
     switch (iconName) {
       case 'bus':
         return (
-          <div className="w-[130px] h-[138px] flex items-center justify-center">
+          <div className="w-[130px] h-[138px] bg-white rounded-lg flex items-center justify-center">
             <img 
               src="/bus_6efa6e.gif" 
               alt="Bus" 
-              className="w-full h-full object-contain"
+              className="w-[110px] h-[110px] object-contain"
             />
           </div>
         );
       case 'airplane':
         return (
-          <div className="w-[130px] h-[138px] flex items-center justify-center">
+          <div className="w-[130px] h-[138px] bg-white rounded-lg flex items-center justify-center">
             <img 
               src="/airplane.gif" 
               alt="Airplane" 
-              className="w-full h-full object-contain"
+              className="w-[110px] h-[110px] object-contain"
             />
           </div>
         );
       case 'helmet':
         return (
-          <div className="w-[130px] h-[138px] flex items-center justify-center">
+          <div className="w-[130px] h-[138px] bg-white rounded-lg flex items-center justify-center">
             <img 
               src="/checklist_15578518_ac77f3.gif" 
               alt="Operator" 
-              className="w-full h-full object-contain"
+              className="w-[110px] h-[110px] object-contain"
             />
           </div>
         );
@@ -68,13 +68,12 @@ interface FeatureCard {
       <section className="bg-white py-12 md:py-16 lg:py-20">
         {/* Heading - Separate from background */}
         <div className="w-full text-center mb-8 md:mb-10 lg:mb-12">
-          <h2 className="font-bold text-[32px] md:text-[40px] lg:text-[48px] leading-tight text-[#303030] mb-4">
+          <h2 className="font-manrope font-bold text-[44px] leading-tight text-[#303030] mb-4" style={{ fontFamily: 'var(--font-manrope)', fontWeight: 700 }}>
             Why OVU?
           </h2>
           <div className="w-[100px] h-[4px] bg-[#E8923D] mx-auto mb-6"></div>
-          <p className="font-normal text-[16px] md:text-[18px] text-center text-[#464646] max-w-[783px] mx-auto px-4">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie a tortor eget tempor. 
-            Suspendisse mollis erat non tortor elementum auctor. Maecenas eu turpis nec ex porta vehicula
+          <p className="font-manrope font-normal text-[18px] text-center text-[#464646] max-w-[783px] mx-auto px-4" style={{ fontFamily: 'var(--font-manrope)', fontWeight: 400 }}>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie a tortor eget tempor. Suspendisse mollis erat non tortor elementum auctor. Maecenas eu turpis nec ex porta vehicula
           </p>
         </div>
 
@@ -128,10 +127,10 @@ interface FeatureCard {
                       
                       {/* Content */}
                       <div className="flex-1 text-left">
-                        <h3 className="font-bold text-[18px] lg:text-[20px] text-[#111111] mb-3">
+                        <h3 className="font-manjari font-normal text-[35px] text-[#111111] mb-3" style={{ fontFamily: 'var(--font-manjari)', fontWeight: 400 }}>
                           {card.title}
                         </h3>
-                        <p className="font-normal text-[14px] lg:text-[16px] text-[#464646] leading-relaxed">
+                        <p className="font-manrope font-normal text-[18px] text-[#464646] leading-relaxed" style={{ fontFamily: 'var(--font-manrope)', fontWeight: 400 }}>
                           {card.description}
                         </p>
                       </div>

@@ -115,9 +115,6 @@ const Footer = () => {
       {/* Designer Credit Section */}
       <div className="w-full bg-black py-3">
         <div className="max-w-[1728px] mx-auto px-4 md:px-8">
-          <p className="font-manrope font-normal text-[12px] md:text-[14px] text-white/60 text-center">
-            Designed by <span className="text-[#3B729C]">HayJay_Jr</span>
-          </p>
         </div>
       </div>
     </footer>

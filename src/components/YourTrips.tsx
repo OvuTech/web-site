@@ -6,7 +6,7 @@ export default function YourTrips() {
       <div className="w-full relative z-10">
         {/* Heading */}
         <div className="text-center mb-12 md:mb-14 lg:mb-16">
-          <h2 className="font-manjari font-[100] text-[22px] md:text-[36px] lg:text-[48px] text-white leading-none tracking-normal">
+          <h2 className="font-manjari font-thin text-[22px] md:text-[36px] lg:text-[48px] text-white leading-none tracking-normal" style={{ fontFamily: 'var(--font-manjari)', fontWeight: 100 }}>
             Your trips, simplified.
           </h2>
         </div>

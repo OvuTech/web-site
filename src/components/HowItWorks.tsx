@@ -65,13 +65,12 @@ export default function HowItWorks() {
       <div className="w-full relative z-10">
         {/* Heading */}
         <div className="w-full text-center mb-12 md:mb-16">
-          <h2 className="font-bold text-[32px] md:text-[40px] lg:text-[48px] leading-tight text-[#303030] mb-4">
+          <h2 className="font-manrope font-bold text-[44px] leading-tight text-[#303030] mb-4" style={{ fontFamily: 'var(--font-manrope)', fontWeight: 700 }}>
             How it works?
           </h2>
           <div className="w-[100px] h-[4px] bg-[#E8923D] mx-auto mb-6"></div>
-          <p className="font-normal text-[16px] md:text-[18px] text-center text-[#464646] max-w-[783px] mx-auto">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie a tortor eget tempor. 
-            Suspendisse mollis erat non tortor elementum auctor. Maecenas eu turpis nec ex porta vehicula
+          <p className="font-manrope font-normal text-[18px] text-center text-[#464646] max-w-[783px] mx-auto" style={{ fontFamily: 'var(--font-manrope)', fontWeight: 400 }}>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie a tortor eget tempor. Suspendisse mollis erat non tortor elementum auctor. Maecenas eu turpis nec ex porta vehicula. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie a tortor eget tempor. Suspendisse mollis erat non tortor elementum auctor. Maecenas eu turpis nec ex porta vehicula
           </p>
         </div>
 
@@ -92,10 +91,10 @@ export default function HowItWorks() {
                   <div className="w-full max-w-[319px] h-[138px] flex items-center justify-center mb-6">
                     {getIcon(step.icon)}
                   </div>
-                  <h3 className="font-bold text-[25px] text-[#111111] mb-4">
+                  <h3 className="font-manjari font-bold text-[25px] text-[#111111] mb-4" style={{ fontFamily: 'var(--font-manjari)', fontWeight: 700 }}>
                     {step.title}
                   </h3>
-                  <p className="font-normal text-[18px] text-[#111111] leading-relaxed">
+                  <p className="font-manrope font-normal text-[18px] text-[#111111] leading-relaxed" style={{ fontFamily: 'var(--font-manrope)', fontWeight: 400 }}>
                     {step.description}
                   </p>
                 </div>
@@ -126,10 +125,10 @@ export default function HowItWorks() {
 
                   {/* Content */}
                   <div className={`flex-1 ${step.alignment === 'right' ? 'text-right' : 'text-left'}`}>
-                    <h3 className="font-bold text-[25px] text-[#111111] mb-3">
+                    <h3 className="font-manjari font-bold text-[25px] text-[#111111] mb-3" style={{ fontFamily: 'var(--font-manjari)', fontWeight: 700 }}>
                       {step.title}
                     </h3>
-                    <p className="font-normal text-[18px] text-[#111111] leading-relaxed">
+                    <p className="font-manrope font-normal text-[18px] text-[#111111] leading-relaxed" style={{ fontFamily: 'var(--font-manrope)', fontWeight: 400 }}>
                       {step.description}
                     </p>
                   </div>

@@ -5,6 +5,7 @@ import WhyOVU from "@/components/WhyOVU";
 import FAQ from "@/components/FAQ";
 import YourTrips from "@/components/YourTrips";
 import JoinWaitlist from "@/components/JoinWaitlist";
+import GrowWithOVU from "@/components/GrowWithOVU";
 import Footer from "@/components/Footer";
 
 export default function Home() {
@@ -19,6 +20,7 @@ export default function Home() {
         <JoinWaitlist />
         <FAQ />
       </main>
+      <GrowWithOVU />
       <Footer />
     </div>
   );

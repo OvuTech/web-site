@@ -16,6 +16,7 @@ module.exports = {
     extend: {
       fontFamily: {
         'manjari': ['var(--font-manjari)', 'sans-serif'],
+        'manrope': ['var(--font-manrope)', 'sans-serif'],
       },
     },
   },
