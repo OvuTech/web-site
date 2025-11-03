@@ -73,7 +73,7 @@ export default function FAQ() {
           alt="" 
           width={600} 
           height={600}
-          className="w-full h-full object-contain"
+          className="w-full h-full"
         />
       </div>
 
@@ -186,10 +186,10 @@ export default function FAQ() {
             />
           </div>
           
-          <div className="bg-[#065888] rounded-[10px] md:rounded-[30px] lg:rounded-[40px] p-8 md:p-12 lg:p-16 relative h-[414px] md:w-auto md:h-auto mx-4 md:mx-8 lg:mx-12 xl:mx-0" style={{ overflow: 'visible' }}>
+          <div className="bg-[#065888] rounded-[10px] md:rounded-[30px] lg:rounded-[40px] p-8 md:p-12 lg:p-16 relative h-[414px] md:w-auto md:h-auto mx-4 md:mx-8 lg:mx-12 xl:mx-0 overflow-hidden">
           
-          {/* White Ellipse Decoration - Desktop Only (768px and above) */}
-          <div className="hidden md:block absolute right-0 top-1/2 -translate-y-1/2 translate-x-[10%] w-[300px] h-[300px] lg:w-[400px] lg:h-[400px] xl:w-[500px] xl:h-[500px] z-0">
+          {/* White Ellipse Decoration */}
+          <div className="absolute right-0 bottom-0 translate-x-[10%] translate-y-[10%] w-[150px] h-[150px] sm:w-[200px] sm:h-[200px] md:w-[250px] md:h-[250px] lg:w-[350px] lg:h-[350px] xl:w-[450px] xl:h-[450px] z-0">
             <Image 
               src="/white-ellipse.png" 
               alt="" 
@@ -223,7 +223,7 @@ export default function FAQ() {
                 placeholder="Type your questions here" 
                 className="hidden md:block px-5 py-3 md:py-4 rounded-[10px] bg-[#065888] border border-white/40 text-white placeholder:text-white/70 focus:outline-none focus:border-white transition md:flex-1"
               />
-              <button className="w-[111px] md:w-auto h-[40px] md:h-auto bg-black text-white rounded-[10px] font-medium hover:bg-black/90 transition text-left md:text-center flex items-center justify-start md:justify-center px-[20px] md:px-8 md:py-3">
+              <button className="w-[111px] md:w-auto h-[40px] md:h-auto bg-black text-white rounded-[10px] font-medium hover:bg-black/90 transition text-center flex items-center justify-center px-[20px] md:px-8 md:py-3">
                 Send
               </button>
             </div>

@@ -61,11 +61,11 @@ const getIcon = (iconName: string) => {
 
 export default function HowItWorks() {
   return (
-    <section className="relative bg-white overflow-x-hidden -mt-[3rem] md:-mt-[5rem] lg:-mt-[8rem]">
+    <section className="how-it-works-section relative bg-white overflow-x-hidden -mt-[3rem] md:-mt-[5rem] lg:-mt-[8rem] pt-8 md:pt-0">
       <div className="w-full relative z-10">
         {/* Heading */}
         <div className="w-full text-center mb-12 md:mb-16">
-          <h2 className="font-manrope font-bold text-[44px] leading-tight text-[#303030] mb-4" style={{ fontFamily: 'var(--font-manrope)', fontWeight: 700 }}>
+          <h2 className="font-manrope font-bold text-[28px] sm:text-[36px] md:text-[44px] leading-tight text-[#303030] mb-4" style={{ fontFamily: 'var(--font-manrope)', fontWeight: 700 }}>
             How it works?
           </h2>
           <div className="w-[100px] h-[4px] bg-[#E8923D] mx-auto mb-6"></div>

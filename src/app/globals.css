@@ -30,9 +30,81 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-/* Media query for 918px width tablets */
-@media (min-width: 768px) and (max-width: 1023px) {
+/* Media query for mobile screens (< 480px) */
+@media (max-width: 479px) {
+  /* WhyOVU - drastically reduce golden background width on mobile */
+  .why-ovu-golden-bg {
+    transform: translateX(-10%) !important;
+    width: 50% !important;
+  }
+  
+  /* WhyOVU - increase right border width on mobile */
+  .why-ovu-right-border {
+    width: 15vw !important;
+  }
+  
+  /* WhyOVU - increase hero image container height on mobile - reduce padding to make box bigger */
+  .why-ovu-mobile-container > div:first-of-type {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+    max-width: 320px !important;
+  }
+  
+  /* WhyOVU - increase box image size on mobile */
+  .why-ovu-mobile-container > div:first-of-type img {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+  
+  /* WhyOVU - increase feature cards container height on mobile */
+  .why-ovu-mobile-container > div:last-of-type {
+    padding-top: 2.5rem !important;
+    padding-bottom: 2.5rem !important;
+  }
+}
+
+/* Media query for 540px screens (Surface Duo) - treat as mobile */
+@media (min-width: 540px) and (max-width: 767px) {
+  /* WhyOVU - adjust golden background translate-x for 540px */
+  .why-ovu-golden-bg {
+    transform: translateX(-35%) !important;
+    width: 130% !important;
+  }
+  
+  /* WhyOVU - adjust right border translate-x for 540px */
+  .why-ovu-right-border {
+    transform: translateX(calc(100% - 10px)) !important;
+    width: 16vw !important;
+  }
+}
+
+/* Media query for tablet screens (768px - 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
   .your-trips-container-918 {
     height: 450px !important;
+  }
+  
+  /* WhyOVU - increase right border width on tablet */
+  .why-ovu-right-border {
+    width: 20vw !important;
+  }
+  
+  /* Hero - increase rounded image height on tablet */
+  .hero-rounded-image {
+    height: 300px !important;
+    object-fit: cover !important;
+  }
+  
+  /* HowItWorks - move section down on tablet */
+  .how-it-works-section {
+    margin-top: 2rem !important;
+  }
+}
+
+/* Media query for exactly 1024px */
+@media (min-width: 1024px) and (max-width: 1024px) {
+  /* Hero - move rounded image down at 1024px */
+  .hero-rounded-image {
+    margin-top: 40px !important;
   }
 }
