@@ -66,7 +66,7 @@ export default function JoinWaitlist() {
         {/* Main heading */}
         <div className="text-center mb-8 md:mb-12">
           <h2 className="font-manjari font-thin text-[32px] md:text-[42px] lg:text-[50px] text-[#303030] leading-[100%] tracking-[0%] mb-4" style={{ fontFamily: 'var(--font-manjari)', fontWeight: 100 }}>
-            Don't miss out, join the queue &<br />get to know first!
+            Get Early Access to the Future of Travel
           </h2>
         </div>
 
@@ -92,8 +92,7 @@ export default function JoinWaitlist() {
 
           {/* Description */}
           <p className="font-manrope font-normal text-[12px] md:text-[18px] text-[#464646] text-center mb-8 md:mb-10 max-w-[600px] mx-auto" style={{ fontFamily: 'var(--font-manrope)', fontWeight: 400 }}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie a tortor eget tempor.
-            Suspendisse mollis erat non tortor elementum auctor. Maecenas eu turpis nec ex porta vehicula
+            Be among the first to experience seamless travel booking. Sign up now and get early access when we launch, plus exclusive perks for waitlist members.
           </p>
 
           {/* Email form - Mobile only */}
@@ -123,13 +122,13 @@ export default function JoinWaitlist() {
               disabled={isLoading}
               className="w-full h-[45px] bg-[#303030] text-white rounded-[10px] font-medium hover:bg-[#303030]/90 transition disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
             >
-              {isLoading ? 'Joining...' : 'Join'}
+              {isLoading ? 'Joining...' : 'Join the Waitlist'}
             </button>
           </form>
 
           {/* Email form - Desktop */}
-          <form onSubmit={handleSubmit} className="hidden md:flex flex-col gap-4 max-w-[600px] mx-auto">
-            <div className="relative w-[496px] h-[80px]">
+          <form onSubmit={handleSubmit} className="hidden md:flex flex-col gap-4 max-w-[600px] mx-auto items-center">
+            <div className="relative w-full max-w-[496px] h-[80px]">
               <div className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M2.5 6.25L10 11.25L17.5 6.25" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
@@ -152,7 +151,7 @@ export default function JoinWaitlist() {
                 className="absolute right-2 top-1/2 -translate-y-1/2 bg-[#303030] text-white px-6 py-3 rounded-[10px] font-manrope font-medium hover:bg-[#303030]/90 transition whitespace-nowrap disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
                 style={{ fontFamily: 'var(--font-manrope)' }}
               >
-                {isLoading ? 'Joining...' : 'Join'}
+                {isLoading ? 'Joining...' : 'Join the Waitlist'}
               </button>
             </div>
             {error && (
@@ -162,7 +161,7 @@ export default function JoinWaitlist() {
 
           {/* Social proof */}
           <div className="max-w-[600px] mx-auto mt-6">
-            <div className="flex items-center justify-start gap-3 md:gap-4 md:w-[496px]">
+            <div className="flex items-center justify-center gap-3 md:gap-4">
               <Image
                 src="/small_circles.png"
                 alt="User avatars"

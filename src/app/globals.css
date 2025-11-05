@@ -19,6 +19,10 @@
   }
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 html,
 body {
   width: 100%;
@@ -32,46 +36,32 @@ body {
 
 /* Media query for mobile screens (< 480px) */
 @media (max-width: 479px) {
-  /* WhyOVU - drastically reduce golden background width on mobile */
+  /* WhyOVU - fine-tune golden background on small mobile */
   .why-ovu-golden-bg {
     transform: translateX(-10%) !important;
     width: 50% !important;
   }
   
-  /* WhyOVU - increase right border width on mobile */
+  /* WhyOVU - fine-tune right border on small mobile */
   .why-ovu-right-border {
     width: 15vw !important;
   }
   
-  /* WhyOVU - increase hero image container height on mobile - reduce padding to make box bigger */
+  /* WhyOVU - ensure proper spacing on mobile */
   .why-ovu-mobile-container > div:first-of-type {
-    padding-top: 2rem !important;
-    padding-bottom: 2rem !important;
     max-width: 320px !important;
-  }
-  
-  /* WhyOVU - increase box image size on mobile */
-  .why-ovu-mobile-container > div:first-of-type img {
-    max-width: 100% !important;
-    height: auto !important;
-  }
-  
-  /* WhyOVU - increase feature cards container height on mobile */
-  .why-ovu-mobile-container > div:last-of-type {
-    padding-top: 2.5rem !important;
-    padding-bottom: 2.5rem !important;
   }
 }
 
 /* Media query for 540px screens (Surface Duo) - treat as mobile */
 @media (min-width: 540px) and (max-width: 767px) {
-  /* WhyOVU - adjust golden background translate-x for 540px */
+  /* WhyOVU - fine-tune golden background for 540px */
   .why-ovu-golden-bg {
     transform: translateX(-35%) !important;
     width: 130% !important;
   }
   
-  /* WhyOVU - adjust right border translate-x for 540px */
+  /* WhyOVU - fine-tune right border for 540px */
   .why-ovu-right-border {
     transform: translateX(calc(100% - 10px)) !important;
     width: 16vw !important;
@@ -84,7 +74,7 @@ body {
     height: 450px !important;
   }
   
-  /* WhyOVU - increase right border width on tablet */
+  /* WhyOVU - fine-tune right border width on tablet */
   .why-ovu-right-border {
     width: 20vw !important;
   }

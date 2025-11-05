@@ -11,22 +11,22 @@ interface Step {
 const steps: Step[] = [
   {
     id: 1,
-    title: "Search lorem Ipsum",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie a tortor eget tempor. Suspendisse mollis erat non tortor elementum auctor. Maecenas eu turpis nec ex porta vehicula. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie a tortor eget tempor. Suspendisse mollis erat non tortor elementum auctor. Maecenas eu turpis nec ex porta vehicula",
+    title: "Find Your Perfect Trip",
+    description: "Enter your departure city, destination, and travel date. OVU shows you real-time options from verified bus operators and airlines. Filter by price, departure time, or seat type.",
     icon: "search",
     alignment: "left"
   },
   {
     id: 2,
-    title: "Book & Pay",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie a tortor eget tempor. Suspendisse mollis erat non tortor elementum auctor. Maecenas eu turpis nec ex porta vehicula. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie a tortor eget tempor. Suspendisse mollis erat non tortor elementum auctor. Maecenas eu turpis nec ex porta vehicula",
+    title: "Reserve with Confidence",
+    description: "Choose your seat or flight and pay securely via card, bank transfer, or USSD. Your booking is confirmed instantly, and your transaction is fully encrypted.",
     icon: "search",
     alignment: "right"
   },
   {
     id: 3,
-    title: "Get Ticket",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie a tortor eget tempor. Suspendisse mollis erat non tortor elementum auctor. Maecenas eu turpis nec ex porta vehicula. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie a tortor eget tempor. Suspendisse mollis erat non tortor elementum auctor. Maecenas eu turpis nec ex porta vehicula",
+    title: "Your Ticket, Instantly",
+    description: "Your e-ticket is delivered to your phone and email immediately. Show it at the terminal or gate, no printing needed.",
     icon: "ticket",
     alignment: "left"
   }
@@ -70,7 +70,7 @@ export default function HowItWorks() {
           </h2>
           <div className="w-[100px] h-[4px] bg-[#E8923D] mx-auto mb-6"></div>
           <p className="font-manrope font-normal text-[18px] text-center text-[#464646] max-w-[783px] mx-auto" style={{ fontFamily: 'var(--font-manrope)', fontWeight: 400 }}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie a tortor eget tempor. Suspendisse mollis erat non tortor elementum auctor. Maecenas eu turpis nec ex porta vehicula. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie a tortor eget tempor. Suspendisse mollis erat non tortor elementum auctor. Maecenas eu turpis nec ex porta vehicula
+            With OVU, booking your travel is effortless. Get from search to seat in minutes on the app.
           </p>
         </div>
 

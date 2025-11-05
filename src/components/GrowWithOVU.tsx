@@ -97,11 +97,11 @@ export default function GrowWithOVU() {
             {/* Left Column - Features Section */}
             <div className="flex-1">
               <h2 className="font-manjari font-bold text-[32px] md:text-[40px] lg:text-[48px] text-[#303030] mb-4 md:mb-6" style={{ fontFamily: 'var(--font-manjari)', fontWeight: 700 }}>
-                Grow with OVU
+                Grow Your Transport Business with OVU
               </h2>
-              
+
               <p className="font-manrope font-normal text-[16px] md:text-[18px] text-[#464646] mb-8 md:mb-10 leading-relaxed" style={{ fontFamily: 'var(--font-manrope)', fontWeight: 400 }}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie a tortor Suspendisse mollis erat non tortor lore elementum auctor. Maecenas eu turpis nec.
+                Expand your reach. Boost your bookings. Digitize your operations. OVU is more than a booking platform — it's a partner for growth. Whether you're a transport operator, travel agency, or airline partner, we give you the tools and visibility to reach thousands of travelers every day.
               </p>
 
               {/* Feature Cards */}
@@ -223,7 +223,7 @@ export default function GrowWithOVU() {
                     className="w-full h-[50px] md:h-[56px] bg-[#065888] text-white rounded-[10px] font-manrope font-medium text-[16px] md:text-[18px] hover:bg-[#065888]/90 transition shadow-md cursor-pointer"
                     style={{ fontFamily: 'var(--font-manrope)', fontWeight: 500 }}
                   >
-                    Apply as Operator
+                    Become a Partner
                   </button>
                 </form>
               </div>

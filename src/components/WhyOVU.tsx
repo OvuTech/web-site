@@ -9,19 +9,19 @@ const featureCards: FeatureCard[] = [
   {
     id: 1,
     title: "For Road Travellers",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie a tortor eget tempor. Suspendisse mollis erat non tortor elementum auctor. Maecenas eu turpis nec ex porta vehicula",
+    description: "Book trusted intercity bus services with ease. See available seats, compare prices, and choose the bus company that fits your schedule. Travel smarter with OVU.",
     icon: "bus"
   },
   {
     id: 2,
-    title: "For Air Travellers", 
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie a tortor eget tempor. Suspendisse mollis erat non tortor elementum auctor. Maecenas eu turpis nec ex porta vehicula",
+    title: "For Air Travellers",
+    description: "Search domestic and regional flights from multiple airlines in one view. Compare fares, check seat availability, and book your flight without the stress.",
     icon: "airplane"
   },
   {
     id: 3,
-    title: "For Operators",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie a tortor eget tempor. Suspendisse mollis erat non tortor elementum auctor. Maecenas eu turpis nec ex porta vehicula",
+    title: "Powerful Tools for Your Business",
+    description: "OVU isn't just for travelers. Transport operators and travel businesses get access to booking management tools, payout tracking, and a growing customer base, all powered by one platform.",
     icon: "helmet"
   }
 ];
@@ -69,11 +69,11 @@ export default function WhyOVU() {
       {/* Heading */}
       <div className="w-full text-center mb-8 md:mb-10 lg:mb-12 px-4">
         <h2 className="font-manrope font-bold text-[32px] md:text-[40px] lg:text-[44px] leading-tight text-[#303030] mb-4" style={{ fontFamily: 'var(--font-manrope)', fontWeight: 700 }}>
-          Why OVU?
+          One Platform, Every Journey.
         </h2>
         <div className="w-[100px] h-[4px] bg-[#E8923D] mx-auto mb-6"></div>
         <p className="font-manrope font-normal text-[16px] md:text-[18px] text-center text-[#464646] max-w-[783px] mx-auto" style={{ fontFamily: 'var(--font-manrope)', fontWeight: 400 }}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie a tortor eget tempor. Suspendisse mollis erat non tortor elementum auctor. Maecenas eu turpis nec ex porta vehicula
+          Whether you're planning a road trip or catching a flight, OVU brings together the best travel options in one place. No more jumping between websites. No hidden fees. Just honest pricing, verified operators, and reliable service.
         </p>
       </div>
 
