@@ -2,18 +2,55 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
+import WaitlistSuccessModal from './WaitlistSuccessModal';
 
 export default function JoinWaitlist() {
   const [email, setEmail] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle waitlist submission
-    console.log('Email submitted:', email);
+    setIsLoading(true);
+    setError('');
+
+    try {
+      const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || '';
+      const response = await fetch(`${apiBaseUrl}/api/v1/waitlist/subscribe`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email,
+          name: '', // Empty name as per requirement
+        }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.detail || 'Failed to subscribe');
+      }
+
+      const data = await response.json();
+      console.log('Subscription successful:', data);
+
+      // Show success modal
+      setShowSuccessModal(true);
+
+      // Clear email input
+      setEmail('');
+    } catch (err) {
+      console.error('Subscription error:', err);
+      setError(err instanceof Error ? err.message : 'Something went wrong. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
-    <section className="bg-white py-12 md:py-16 lg:py-20 relative overflow-hidden">
+    <section id="waitlist" className="bg-white py-12 md:py-16 lg:py-20 relative overflow-hidden">
       {/* Blue wave at bottom */}
       <div className="absolute bottom-[-20px] md:bottom-[-50px] left-0 w-full h-[200px] md:h-[300px] lg:h-[350px]">
         <Image 
@@ -54,13 +91,13 @@ export default function JoinWaitlist() {
           </h3>
 
           {/* Description */}
-          <p className="font-manrope font-normal text-[12px] md:text-[18px] text-[#464646] text-center mb-8 md:mb-10 max-w-[600px] mx-auto leading-[100%] tracking-[0%]" style={{ fontFamily: 'var(--font-manrope)', fontWeight: 400 }}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie a tortor eget tempor. 
+          <p className="font-manrope font-normal text-[12px] md:text-[18px] text-[#464646] text-center mb-8 md:mb-10 max-w-[600px] mx-auto" style={{ fontFamily: 'var(--font-manrope)', fontWeight: 400 }}>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie a tortor eget tempor.
             Suspendisse mollis erat non tortor elementum auctor. Maecenas eu turpis nec ex porta vehicula
           </p>
 
           {/* Email form - Mobile only */}
-          <form onSubmit={handleSubmit} className="flex flex-col gap-4 mb-6 max-w-[600px] mx-auto md:hidden">
+          <form onSubmit={handleSubmit} className="flex flex-col gap-4 max-w-[600px] mx-auto md:hidden">
             <div className="relative w-full">
               <div className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -68,25 +105,30 @@ export default function JoinWaitlist() {
                   <rect x="2.5" y="5" width="15" height="10" rx="2" stroke="currentColor" strokeWidth="1.5"/>
                 </svg>
               </div>
-              <input 
-                type="email" 
-                placeholder="Type your E-mail here" 
+              <input
+                type="email"
+                placeholder="Type your E-mail here"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="w-full h-[45px] pl-12 pr-4 rounded-[20px] bg-white text-[#303030] placeholder:text-gray-400 focus:outline-none focus:border-[#065888] transition"
                 required
+                disabled={isLoading}
               />
             </div>
-            <button 
+            {error && (
+              <p className="text-red-500 text-sm text-center">{error}</p>
+            )}
+            <button
               type="submit"
-              className="w-full h-[45px] bg-[#303030] text-white rounded-[10px] font-medium hover:bg-[#303030]/90 transition"
+              disabled={isLoading}
+              className="w-full h-[45px] bg-[#303030] text-white rounded-[10px] font-medium hover:bg-[#303030]/90 transition disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
             >
-              Join
+              {isLoading ? 'Joining...' : 'Join'}
             </button>
           </form>
 
           {/* Email form - Desktop */}
-          <form onSubmit={handleSubmit} className="hidden md:flex mb-6 max-w-[600px] mx-auto">
+          <form onSubmit={handleSubmit} className="hidden md:flex flex-col gap-4 max-w-[600px] mx-auto">
             <div className="relative w-[496px] h-[80px]">
               <div className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -94,40 +136,53 @@ export default function JoinWaitlist() {
                   <rect x="2.5" y="5" width="15" height="10" rx="2" stroke="currentColor" strokeWidth="1.5"/>
                 </svg>
               </div>
-              <input 
-                type="email" 
-                placeholder="Type your E-mail here" 
+              <input
+                type="email"
+                placeholder="Type your E-mail here"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="w-full h-full pl-12 pr-[120px] rounded-[15px] bg-white text-[#303030] placeholder:text-gray-400 focus:outline-none focus:border-[#065888] transition"
                 style={{ fontFamily: 'var(--font-manrope)' }}
                 required
+                disabled={isLoading}
               />
-              <button 
+              <button
                 type="submit"
-                className="absolute right-2 top-1/2 -translate-y-1/2 bg-[#303030] text-white px-6 py-3 rounded-[10px] font-manrope font-medium hover:bg-[#303030]/90 transition whitespace-nowrap"
+                disabled={isLoading}
+                className="absolute right-2 top-1/2 -translate-y-1/2 bg-[#303030] text-white px-6 py-3 rounded-[10px] font-manrope font-medium hover:bg-[#303030]/90 transition whitespace-nowrap disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
                 style={{ fontFamily: 'var(--font-manrope)' }}
               >
-                Join
+                {isLoading ? 'Joining...' : 'Join'}
               </button>
             </div>
+            {error && (
+              <p className="text-red-500 text-sm text-center">{error}</p>
+            )}
           </form>
 
           {/* Social proof */}
-          <div className="flex items-center justify-center gap-3">
-            <Image 
-              src="/small_circles.png" 
-              alt="User avatars" 
-              width={32} 
-              height={32}
-              className="w-8 h-8 object-contain"
-            />
-            <p className="font-normal text-[14px] md:text-[16px] text-[#464646]">
-              Join the <span className="font-bold text-[#303030]">3000+</span> others who have signed up
-            </p>
+          <div className="max-w-[600px] mx-auto mt-6">
+            <div className="flex items-center justify-start gap-3 md:gap-4 md:w-[496px]">
+              <Image
+                src="/small_circles.png"
+                alt="User avatars"
+                width={32}
+                height={32}
+                className="w-8 h-8 md:w-12 md:h-12 object-contain"
+              />
+              <p className="font-normal text-[14px] md:text-[18px] text-[#464646]">
+                Join the <span className="font-bold text-[#303030]">3000+</span> others who have signed up
+              </p>
+            </div>
           </div>
         </div>
       </div>
+
+      {/* Success Modal */}
+      <WaitlistSuccessModal
+        open={showSuccessModal}
+        onOpenChange={setShowSuccessModal}
+      />
     </section>
   );
 }

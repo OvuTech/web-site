@@ -90,7 +90,7 @@ export default function GrowWithOVU() {
   };
 
   return (
-    <section className="py-12 md:py-16 lg:py-20">
+    <section id="for-operators" className="py-12 md:py-16 lg:py-20">
       <div className="container mx-auto px-4 md:px-8 lg:px-[144px] max-w-[1728px]">
         <div className="bg-[#F6FCFF] rounded-[20px] md:rounded-[30px] p-8 md:p-12 lg:p-16">
           <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 xl:gap-16">
@@ -220,7 +220,7 @@ export default function GrowWithOVU() {
                   {/* Submit Button */}
                   <button
                     type="submit"
-                    className="w-full h-[50px] md:h-[56px] bg-[#065888] text-white rounded-[10px] font-manrope font-medium text-[16px] md:text-[18px] hover:bg-[#065888]/90 transition shadow-md"
+                    className="w-full h-[50px] md:h-[56px] bg-[#065888] text-white rounded-[10px] font-manrope font-medium text-[16px] md:text-[18px] hover:bg-[#065888]/90 transition shadow-md cursor-pointer"
                     style={{ fontFamily: 'var(--font-manrope)', fontWeight: 500 }}
                   >
                     Apply as Operator

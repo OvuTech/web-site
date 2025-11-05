@@ -65,7 +65,7 @@ export default function FAQ() {
   };
 
   return (
-    <section className="bg-white lg:bg-[#F5F5F5] py-12 md:py-16 lg:py-20 relative overflow-visible md:overflow-hidden mt-10">
+    <section id="faqs" className="bg-white lg:bg-[#F5F5F5] py-12 md:py-16 lg:py-20 relative overflow-visible md:overflow-hidden mt-10">
       {/* White Ellipse Decoration - Desktop */}
       <div className="hidden lg:block absolute right-0 top-[20%] w-[500px] h-[500px] xl:w-[600px] xl:h-[600px] opacity-80">
         <Image 
@@ -120,7 +120,7 @@ export default function FAQ() {
               </h2>
               
               {/* More Questions Button - Desktop: Next to heading */}
-              <button className="bg-[#303030] text-white rounded-[10px] font-medium hover:bg-[#303030]/90 transition flex items-center whitespace-nowrap" style={{ width: '180px', height: '50px', padding: '20px', gap: '10px' }}>
+              <button className="bg-[#303030] text-white rounded-[10px] font-medium hover:bg-[#303030]/90 transition flex items-center whitespace-nowrap cursor-pointer" style={{ width: '180px', height: '50px', padding: '20px', gap: '10px' }}>
                 More Questions
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -134,7 +134,7 @@ export default function FAQ() {
               >
                 <button
                   onClick={() => toggleFAQ(faq.id)}
-                  className="w-full flex justify-between items-center p-4 md:p-5 text-left hover:bg-gray-50 transition"
+                  className="w-full flex justify-between items-center p-4 md:p-5 text-left hover:bg-gray-50 transition cursor-pointer"
                 >
                   <span className="font-manjari font-normal text-[14px] md:text-[16px] text-[#303030] pr-4" style={{ fontFamily: 'var(--font-manjari)' }}>
                     {faq.id}. {faq.question}
@@ -163,7 +163,7 @@ export default function FAQ() {
             
             {/* More Questions Button - Mobile: After FAQ accordions */}
             <div className="flex justify-center lg:hidden mt-6">
-              <button className="bg-[#303030] text-white rounded-[10px] font-medium hover:bg-[#303030]/90 transition flex items-center whitespace-nowrap" style={{ width: '163px', height: '35px', padding: '20px', gap: '10px' }}>
+              <button className="bg-[#303030] text-white rounded-[10px] font-medium hover:bg-[#303030]/90 transition flex items-center whitespace-nowrap cursor-pointer" style={{ width: '163px', height: '35px', padding: '20px', gap: '10px' }}>
                 More Questions
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -223,7 +223,7 @@ export default function FAQ() {
                 placeholder="Type your questions here" 
                 className="hidden md:block px-5 py-3 md:py-4 rounded-[10px] bg-[#065888] border border-white/40 text-white placeholder:text-white/70 focus:outline-none focus:border-white transition md:flex-1"
               />
-              <button className="w-[111px] md:w-auto h-[40px] md:h-auto bg-black text-white rounded-[10px] font-medium hover:bg-black/90 transition text-center flex items-center justify-center px-[20px] md:px-8 md:py-3">
+              <button className="w-[111px] md:w-auto h-[40px] md:h-auto bg-black text-white rounded-[10px] font-medium hover:bg-black/90 transition text-center flex items-center justify-center px-[20px] md:px-8 md:py-3 cursor-pointer">
                 Send
               </button>
             </div>

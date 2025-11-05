@@ -61,7 +61,7 @@ const getIcon = (iconName: string) => {
 
 export default function HowItWorks() {
   return (
-    <section className="how-it-works-section relative bg-white overflow-x-hidden -mt-[3rem] md:-mt-[5rem] lg:-mt-[8rem] pt-8 md:pt-0">
+    <section id="how-it-works" className="how-it-works-section relative bg-white overflow-x-hidden -mt-[3rem] md:-mt-[5rem] lg:-mt-[8rem] pt-8 md:pt-0">
       <div className="w-full relative z-10">
         {/* Heading */}
         <div className="w-full text-center mb-12 md:mb-16">

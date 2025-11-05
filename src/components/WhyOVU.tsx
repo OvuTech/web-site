@@ -65,7 +65,7 @@ const getIcon = (iconName: string) => {
 
 export default function WhyOVU() {
   return (
-    <section className="bg-white py-2 md:py-16 lg:py-20 overflow-hidden mt-6">
+    <section id="for-travellers" className="bg-white py-2 md:py-16 lg:py-20 overflow-hidden mt-6">
       {/* Heading */}
       <div className="w-full text-center mb-8 md:mb-10 lg:mb-12 px-4">
         <h2 className="font-manrope font-bold text-[32px] md:text-[40px] lg:text-[44px] leading-tight text-[#303030] mb-4" style={{ fontFamily: 'var(--font-manrope)', fontWeight: 700 }}>

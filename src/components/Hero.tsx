@@ -27,7 +27,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="bg-white pt-8 relative overflow-hidden">
+    <section id="home" className="bg-white pt-8 relative overflow-hidden">
       {/* Blue blur circle - Right */}
       <div
         className="absolute right-[-100px] top-[100px] w-[200px] h-[200px] rounded-full blur-[230px] hidden xl:block"
