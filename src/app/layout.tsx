@@ -37,8 +37,8 @@ const manjari = Manjari({
 });
 
 export const metadata: Metadata = {
-  title: "OVU",
-  description: "OVU",
+  title: "OVU - One Stop for Flights and Road Trips in Nigeria",
+  description: "Search, book, and pay for buses and flights, all in one place.",
 };
 
 export const viewport: Viewport = {

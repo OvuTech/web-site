@@ -1,7 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import Image from 'next/image';
+import { motion, useInView } from 'framer-motion';
 
 interface FAQItem {
   id: number;
@@ -39,13 +40,15 @@ const faqData: FAQItem[] = [
 
 export default function FAQ() {
   const [openId, setOpenId] = useState<number>(1);
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, amount: 0.1 });
 
   const toggleFAQ = (id: number) => {
     setOpenId(openId === id ? 0 : id);
   };
 
   return (
-    <section id="faqs" className="bg-white lg:bg-[#F5F5F5] py-12 md:py-16 lg:py-20 relative overflow-visible md:overflow-hidden mt-10">
+    <section ref={ref} id="faqs" className="bg-white lg:bg-[#F5F5F5] py-12 md:py-16 lg:py-20 relative overflow-visible md:overflow-hidden mt-10">
       {/* White Ellipse Decoration - Desktop */}
       <div className="hidden lg:block absolute right-0 top-[20%] w-[500px] h-[500px] xl:w-[600px] xl:h-[600px] opacity-80 z-0 pointer-events-none">
         <Image 
@@ -59,27 +62,37 @@ export default function FAQ() {
 
       <div className="container mx-auto px-4 md:px-8 lg:px-[144px] max-w-[1728px] relative z-10">
         {/* Header - Mobile only */}
-        <div className="text-center lg:hidden mb-8">
+        <motion.div
+          className="text-center lg:hidden mb-8"
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.6 }}
+        >
           <h2 className="font-manjari font-thin text-[22px] text-[#303030] mb-2 leading-[100%] tracking-[0%]" style={{ fontFamily: 'var(--font-manjari)', fontWeight: 100 }}>
             Frequently Asked Questions
           </h2>
-          
+
           {/* FAQ Image - Mobile only */}
           <div className="flex justify-center mt-6 mb-6">
-            <Image 
-              src="/faq_mobile.png" 
-              alt="FAQ" 
-              width={358} 
+            <Image
+              src="/faq_mobile.png"
+              alt="FAQ"
+              width={358}
               height={300}
               className="w-[358px] h-[300px] object-contain"
             />
           </div>
-        </div>
+        </motion.div>
 
         {/* FAQ Content - Desktop Layout */}
         <div className="flex flex-col lg:flex-row lg:items-start gap-8 lg:gap-8 xl:gap-12">
           {/* Left Side - Question Mark Icon - Desktop only */}
-          <div className="hidden lg:flex lg:flex-col lg:w-[400px] xl:w-[460px] shrink-0 relative z-10">
+          <motion.div
+            className="hidden lg:flex lg:flex-col lg:w-[400px] xl:w-[460px] shrink-0 relative z-10"
+            initial={{ opacity: 0, x: -50 }}
+            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
+            transition={{ duration: 0.7, delay: 0.2 }}
+          >
             <div className="bg-white rounded-[30px] p-6 xl:p-8 2xl:p-12 shadow-lg flex items-center justify-center w-full">
               <Image
                 src="/faq.png"
@@ -89,12 +102,17 @@ export default function FAQ() {
                 className="w-full h-auto object-contain"
               />
             </div>
-          </div>
+          </motion.div>
 
           {/* Right Side - FAQ List */}
           <div className="flex-1 w-full lg:max-w-[700px] xl:max-w-[800px] flex flex-col gap-10">
             {/* Header - Desktop: Heading and Button */}
-            <div className="hidden lg:block mb-6 xl:mb-8">
+            <motion.div
+              className="hidden lg:block mb-6 xl:mb-8"
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+            >
               <div className="flex items-center justify-between mb-4">
                 <h2 className="font-manjari font-thin text-[22px] xl:text-[24px] text-[#303030] leading-[100%] tracking-[0%]" style={{ fontFamily: 'var(--font-manjari)', fontWeight: 100 }}>
                   Frequently Asked Questions
@@ -108,14 +126,17 @@ export default function FAQ() {
                   </svg>
                 </button>
               </div>
-            </div>
+            </motion.div>
 
             {/* FAQ Items Container */}
             <div className="space-y-4 xl:space-y-5">
-              {faqData.map((faq) => (
-                <div 
+              {faqData.map((faq, index) => (
+                <motion.div
                   key={faq.id}
                   className="bg-white rounded-[10px] xl:rounded-[12px] overflow-hidden transition-all duration-300 shadow-sm hover:shadow-md"
+                  initial={{ opacity: 0, x: 50 }}
+                  animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
+                  transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
                 >
                   <button
                     onClick={() => toggleFAQ(faq.id)}
@@ -143,7 +164,7 @@ export default function FAQ() {
                       </p>
                     </div>
                   )}
-                </div>
+                </motion.div>
               ))}
             </div>
 

@@ -1,7 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import Image from 'next/image';
+import { motion, useInView } from 'framer-motion';
 import WaitlistSuccessModal from './WaitlistSuccessModal';
 
 export default function JoinWaitlist() {
@@ -9,6 +10,8 @@ export default function JoinWaitlist() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, amount: 0.1 });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -50,13 +53,13 @@ export default function JoinWaitlist() {
   };
 
   return (
-    <section id="waitlist" className="bg-white py-12 md:py-16 lg:py-20 relative overflow-hidden">
+    <section ref={ref} id="waitlist" className="bg-white py-12 md:py-16 lg:py-20 relative overflow-hidden">
       {/* Blue wave at bottom */}
       <div className="absolute bottom-[-20px] md:bottom-[-50px] left-0 w-full h-[200px] md:h-[300px] lg:h-[350px]">
-        <Image 
-          src="/rounded.png" 
-          alt="" 
-          width={1728} 
+        <Image
+          src="/rounded.png"
+          alt=""
+          width={1728}
           height={350}
           className="w-full h-full object-cover"
         />
@@ -64,21 +67,32 @@ export default function JoinWaitlist() {
 
       <div className="container mx-auto px-4 md:px-8 max-w-[1728px] relative z-10">
         {/* Main heading */}
-        <div className="text-center mb-8 md:mb-12">
+        <motion.div
+          className="text-center mb-8 md:mb-12"
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.6 }}
+        >
           <h2 className="font-manjari font-thin text-[32px] md:text-[42px] lg:text-[50px] text-[#303030] leading-[100%] tracking-[0%] mb-4" style={{ fontFamily: 'var(--font-manjari)', fontWeight: 100 }}>
             Get Early Access to the Future of Travel
           </h2>
-        </div>
+        </motion.div>
 
         {/* Waitlist card */}
-        <div className="max-w-[900px] mx-auto rounded-[30px] p-8 md:p-12 lg:p-16" style={{ backgroundColor: 'rgba(216, 240, 255, 0.2)' }}>
+        <motion.div
+          className="max-w-[900px] mx-auto rounded-[30px] p-8 md:p-12 lg:p-16"
+          style={{ backgroundColor: 'rgba(216, 240, 255, 0.2)' }}
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
+          transition={{ duration: 0.7, delay: 0.3 }}
+        >
           {/* Logo */}
           <div className="flex justify-center mb-6">
             <div className="bg-white rounded-lg p-3">
-              <Image 
-                src="/bird.png" 
-                alt="OVU Logo" 
-                width={60} 
+              <Image
+                src="/bird.png"
+                alt="OVU Logo"
+                width={60}
                 height={60}
                 className="w-[60px] h-[60px] object-contain"
               />
@@ -91,7 +105,7 @@ export default function JoinWaitlist() {
           </h3>
 
           {/* Description */}
-          <p className="font-manrope font-normal text-[12px] md:text-[18px] text-[#464646] text-center mb-8 md:mb-10 max-w-[600px] mx-auto" style={{ fontFamily: 'var(--font-manrope)', fontWeight: 400 }}>
+          <p className="font-manrope font-normal text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px] text-[#464646] text-center mb-8 md:mb-10 max-w-[600px] mx-auto px-4 md:px-6" style={{ fontFamily: 'var(--font-manrope)', fontWeight: 400 }}>
             Be among the first to experience seamless travel booking. Sign up now and get early access when we launch, plus exclusive perks for waitlist members.
           </p>
 
@@ -174,7 +188,7 @@ export default function JoinWaitlist() {
               </p>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
 
       {/* Success Modal */}

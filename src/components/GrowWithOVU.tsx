@@ -1,7 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import Image from 'next/image';
+import { motion, useInView } from 'framer-motion';
 
 interface Feature {
   id: number;
@@ -75,6 +76,8 @@ export default function GrowWithOVU() {
     phone: '',
     email: ''
   });
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, amount: 0.1 });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setFormData({
@@ -90,24 +93,35 @@ export default function GrowWithOVU() {
   };
 
   return (
-    <section id="for-operators" className="py-12 md:py-16 lg:py-20">
+    <section ref={ref} id="for-operators" className="py-12 md:py-16 lg:py-20">
       <div className="container mx-auto px-4 md:px-8 lg:px-[144px] max-w-[1728px]">
         <div className="bg-[#F6FCFF] rounded-[20px] md:rounded-[30px] p-8 md:p-12 lg:p-16">
           <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 xl:gap-16">
             {/* Left Column - Features Section */}
-            <div className="flex-1">
+            <motion.div
+              className="flex-1"
+              initial={{ opacity: 0, x: -50 }}
+              animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
+              transition={{ duration: 0.7, delay: 0.2 }}
+            >
               <h2 className="font-manjari font-bold text-[32px] md:text-[40px] lg:text-[48px] text-[#303030] mb-4 md:mb-6" style={{ fontFamily: 'var(--font-manjari)', fontWeight: 700 }}>
                 Grow Your Transport Business with OVU
               </h2>
 
-              <p className="font-manrope font-normal text-[16px] md:text-[18px] text-[#464646] mb-8 md:mb-10 leading-relaxed" style={{ fontFamily: 'var(--font-manrope)', fontWeight: 400 }}>
+              <p className="font-manrope font-normal text-[14px] sm:text-[16px] md:text-[18px] text-[#464646] mb-8 md:mb-10 leading-relaxed px-2 md:px-0" style={{ fontFamily: 'var(--font-manrope)', fontWeight: 400 }}>
                 Expand your reach. Boost your bookings. Digitize your operations. OVU is more than a booking platform — it's a partner for growth. Whether you're a transport operator, travel agency, or airline partner, we give you the tools and visibility to reach thousands of travelers every day.
               </p>
 
               {/* Feature Cards */}
               <div className="space-y-6 md:space-y-8">
-                {features.map((feature) => (
-                  <div key={feature.id} className="flex items-start gap-4 md:gap-5">
+                {features.map((feature, index) => (
+                  <motion.div
+                    key={feature.id}
+                    className="flex items-start gap-4 md:gap-5"
+                    initial={{ opacity: 0, x: -30 }}
+                    animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
+                    transition={{ duration: 0.6, delay: 0.4 + index * 0.15 }}
+                  >
                     {/* Icon Container */}
                     <div className="shrink-0 w-[60px] h-[60px] bg-white border border-gray-200 rounded-lg flex items-center justify-center p-2 shadow-sm">
                       {getIcon(feature.icon)}
@@ -122,16 +136,21 @@ export default function GrowWithOVU() {
                         {feature.description}
                       </p>
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
-            </div>
+            </motion.div>
 
             {/* Horizontal Divider - Mobile (between sections) */}
             <div className="lg:hidden w-full max-w-[304px] h-0 border-t border-[#065888] mx-auto" style={{ borderWidth: '1px' }}></div>
 
             {/* Right Column - Application Form */}
-            <div className="flex-1">
+            <motion.div
+              className="flex-1"
+              initial={{ opacity: 0, x: 50 }}
+              animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
+              transition={{ duration: 0.7, delay: 0.4 }}
+            >
               <div className="bg-[#F6FCFF] md:bg-white md:border md:border-gray-200 rounded-[20px] p-6 md:py-[57px] md:px-[77px] md:shadow-md">
                 <form onSubmit={handleSubmit} className="space-y-5 md:space-y-6">
                   {/* Company Name */}
@@ -227,7 +246,7 @@ export default function GrowWithOVU() {
                   </button>
                 </form>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>

@@ -1,4 +1,9 @@
+'use client';
+
 import Image from 'next/image';
+import { motion } from 'framer-motion';
+import { useInView } from 'framer-motion';
+import { useRef } from 'react';
 
 interface Step {
   id: number;
@@ -20,7 +25,7 @@ const steps: Step[] = [
     id: 2,
     title: "Reserve with Confidence",
     description: "Choose your seat or flight and pay securely via card, bank transfer, or USSD. Your booking is confirmed instantly, and your transaction is fully encrypted.",
-    icon: "search",
+    icon: "booking",
     alignment: "right"
   },
   {
@@ -36,9 +41,19 @@ const getIcon = (iconName: string) => {
   switch (iconName) {
     case 'search':
       return (
-        <Image 
-          src="/search.png" 
-          alt="Search" 
+        <Image
+          src="/search.png"
+          alt="Search"
+          width={319}
+          height={138}
+          className="w-[319px] h-[138px] object-contain"
+        />
+      );
+    case 'booking':
+      return (
+        <Image
+          src="/booking_icon.png"
+          alt="Booking"
           width={319}
           height={138}
           className="w-[319px] h-[138px] object-contain"
@@ -46,9 +61,9 @@ const getIcon = (iconName: string) => {
       );
     case 'ticket':
       return (
-        <Image 
-          src="/ticket.png" 
-          alt="Ticket" 
+        <Image
+          src="/ticket.png"
+          alt="Ticket"
           width={319}
           height={138}
           className="w-[319px] h-[138px] object-contain"
@@ -60,24 +75,37 @@ const getIcon = (iconName: string) => {
 };
 
 export default function HowItWorks() {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, amount: 0.1 });
+
   return (
-    <section id="how-it-works" className="how-it-works-section relative bg-white overflow-x-hidden -mt-[3rem] md:-mt-[5rem] lg:-mt-[8rem] pt-8 md:pt-0">
+    <section ref={ref} id="how-it-works" className="how-it-works-section relative bg-white overflow-x-hidden -mt-[3rem] md:-mt-[5rem] lg:-mt-[8rem] pt-8 md:pt-0">
       <div className="w-full relative z-10">
         {/* Heading */}
-        <div className="w-full text-center mb-12 md:mb-16">
+        <motion.div
+          className="w-full text-center mb-12 md:mb-16"
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.6 }}
+        >
           <h2 className="font-manrope font-bold text-[28px] sm:text-[36px] md:text-[44px] leading-tight text-[#303030] mb-4" style={{ fontFamily: 'var(--font-manrope)', fontWeight: 700 }}>
             How it works?
           </h2>
           <div className="w-[100px] h-[4px] bg-[#E8923D] mx-auto mb-6"></div>
-          <p className="font-manrope font-normal text-[18px] text-center text-[#464646] max-w-[783px] mx-auto" style={{ fontFamily: 'var(--font-manrope)', fontWeight: 400 }}>
+          <p className="font-manrope font-normal text-[14px] sm:text-[16px] md:text-[18px] text-center text-[#464646] max-w-[783px] mx-auto px-4 md:px-6" style={{ fontFamily: 'var(--font-manrope)', fontWeight: 400 }}>
             With OVU, booking your travel is effortless. Get from search to seat in minutes on the app.
           </p>
-        </div>
+        </motion.div>
 
         {/* Steps - Mobile & Tablet View */}
         <div className="xl:hidden space-y-0 w-full">
           {steps.map((step, index) => (
-            <div key={step.id}>
+            <motion.div
+              key={step.id}
+              initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+              animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+              transition={{ duration: 0.6, delay: index * 0.2 }}
+            >
               {/* Number - Show for all steps */}
               <div className="flex justify-center py-6">
                 <div className="w-[60px] h-[60px] bg-[#065888] rounded-full flex items-center justify-center">
@@ -99,14 +127,20 @@ export default function HowItWorks() {
                   </p>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
 
         {/* Steps - Desktop View */}
         <div className="hidden xl:block space-y-8 md:space-y-12 overflow-hidden">
-          {steps.map((step) => (
-            <div key={step.id} className={`flex ${step.alignment === 'left' ? 'justify-start' : 'justify-end'} items-center`}>
+          {steps.map((step, index) => (
+            <motion.div
+              key={step.id}
+              className={`flex ${step.alignment === 'left' ? 'justify-start' : 'justify-end'} items-center`}
+              initial={{ opacity: 0, x: step.alignment === 'left' ? -100 : 100 }}
+              animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: step.alignment === 'left' ? -100 : 100 }}
+              transition={{ duration: 0.7, delay: index * 0.3 }}
+            >
               {step.alignment === 'right' && (
                 /* Left Number - Overlapping at edge */
                 <div className="shrink-0 w-[60px] h-[60px] md:w-[80px] md:h-[80px] bg-[#065888] rounded-full flex items-center justify-center -mr-8 relative z-10">
@@ -148,7 +182,7 @@ export default function HowItWorks() {
                   <span className="font-normal text-[25px] text-white">{step.id}</span>
                 </div>
               )}
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

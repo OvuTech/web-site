@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 
 const nigerianStates = [
   'Abia', 'Abuja', 'Adamawa', 'Akwa Ibom', 'Anambra', 'Bauchi', 'Bayelsa', 'Benue',
@@ -42,7 +43,12 @@ export default function Hero() {
 
       <div className="flex flex-col items-center text-center px-4 relative">
         {/* Animated state + flag */}
-        <div className="flex items-center justify-center gap-3 mb-6 md:mb-8">
+        <motion.div
+          className="flex items-center justify-center gap-3 mb-6 md:mb-8"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
           <Image
             src="/twemoji_flag-nigeria.png"
             alt="Nigeria Flag"
@@ -59,34 +65,59 @@ export default function Hero() {
               {nigerianStates[currentIndex]}
             </span>
           </div>
-        </div>
+        </motion.div>
 
         {/* Heading */}
-        <h1 className="font-poppins font-bold text-[32px] md:text-[52px] lg:text-[68px] text-[#303030] mb-4 max-w-[940px]">
+        <motion.h1
+          className="font-poppins font-bold text-[32px] md:text-[52px] lg:text-[68px] text-[#303030] mb-4 max-w-[940px]"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
           One Stop for Flights and Road Trips in Nigeria
-        </h1>
+        </motion.h1>
 
         {/* Subtext */}
-        <p className="font-manrope text-[14px] md:text-[16px] lg:text-[18px] text-[#464646] max-w-[700px] mb-10">
+        <motion.p
+          className="font-manrope text-[14px] md:text-[16px] lg:text-[18px] text-[#464646] max-w-[700px] mb-10 px-4 md:px-6"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+        >
           Search, book, and pay for buses and flights, all in one place.
-        </p>
+        </motion.p>
 
         {/* Phones & Notifications */}
-        <div className="relative w-full max-w-[1600px] aspect-[16/9] sm:aspect-[3/2] md:aspect-[5/3] lg:aspect-[16/7] overflow-hidden">
+        <motion.div
+          className="relative w-full max-w-[1600px] aspect-video sm:aspect-3/2 md:aspect-5/3 lg:aspect-16/7 overflow-hidden"
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+        >
           {/* Phones */}
           <div className="absolute inset-0 flex justify-center items-end scale-[1] sm:scale-[0.95] md:scale-[1] z-10 pb-[2%] sm:pb-[3%] md:pb-[2%] lg:pb-[4%] h-full md:h-[90%] lg:h-[88%]">
             {/* Left Phone */}
-            <div className="relative w-[30%] max-w-[260px] sm:max-w-[280px] md:max-w-[320px] lg:max-w-[420px] h-full translate-y-[4%] md:translate-y-[5%] lg:translate-y-[6.4%] -mr-[10%] sm:-mr-[8%] md:-mr-[8%] lg:-mr-[10%]">
+            <motion.div
+              className="relative w-[30%] max-w-[260px] sm:max-w-[280px] md:max-w-[320px] lg:max-w-[420px] h-full translate-y-[4%] md:translate-y-[5%] lg:translate-y-[6.4%] -mr-[10%] sm:-mr-[8%] md:-mr-[8%] lg:-mr-[10%]"
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.8 }}
+            >
               <Image
                 src="/phone_left.png"
                 alt="Phone Left"
                 fill
                 className="object-contain"
               />
-            </div>
+            </motion.div>
 
             {/* Center Phone */}
-            <div className="relative w-[40%] max-w-[440px] sm:max-w-[480px] md:max-w-[520px] lg:max-w-[600px] z-10 -translate-y-[12%] sm:-translate-y-[8%] md:-translate-y-[6%] lg:-translate-y-[8%] h-full">
+            <motion.div
+              className="relative w-[40%] max-w-[440px] sm:max-w-[480px] md:max-w-[520px] lg:max-w-[600px] z-10 -translate-y-[12%] sm:-translate-y-[8%] md:-translate-y-[6%] lg:-translate-y-[8%] h-full"
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.9 }}
+            >
               <Image
                 src="/phone_center.png"
                 alt="Phone Center"
@@ -94,17 +125,22 @@ export default function Hero() {
                 className="object-contain"
                 priority
               />
-            </div>
+            </motion.div>
 
             {/* Right Phone */}
-            <div className="relative w-[28%] max-w-[260px] sm:max-w-[280px] md:max-w-[320px] lg:max-w-[420px] h-full translate-y-[4%] md:translate-y-[5%] lg:translate-y-[5%] -ml-[10%] sm:-ml-[10%] md:-ml-[10%] lg:-ml-[12%]">
+            <motion.div
+              className="relative w-[28%] max-w-[260px] sm:max-w-[280px] md:max-w-[320px] lg:max-w-[420px] h-full translate-y-[4%] md:translate-y-[5%] lg:translate-y-[5%] -ml-[10%] sm:-ml-[10%] md:-ml-[10%] lg:-ml-[12%]"
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.8 }}
+            >
               <Image
                 src="/phone_right.png"
                 alt="Phone Right"
                 fill
                 className="object-contain"
               />
-            </div>
+            </motion.div>
           </div>
 
           {/* Notifications */}
@@ -133,7 +169,7 @@ export default function Hero() {
               </p>
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Bottom curved overlay - full width, breaks out of padding */}
         <div className="hero-rounded-container absolute bottom-[-10px] left-1/2 -translate-x-1/2 w-screen z-30 sm:bottom-auto sm:top-[calc(75.9%-10px)] pointer-events-none">
