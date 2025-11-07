@@ -7,11 +7,14 @@ import YourTrips from "@/components/YourTrips";
 import JoinWaitlist from "@/components/JoinWaitlist";
 import GrowWithOVU from "@/components/GrowWithOVU";
 import Footer from "@/components/Footer";
+import PageLoader from "@/components/PageLoader";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-white overflow-x-hidden w-full">
-      <Header />
+    <>
+      <PageLoader />
+      <div className="min-h-screen bg-white overflow-x-hidden w-full">
+        <Header />
       <main className="pt-[60px] md:pt-[100px] xl:pt-[150px] w-full overflow-x-hidden">
         <Hero />
         <HowItWorks />
@@ -22,6 +25,7 @@ export default function Home() {
       </main>
       <GrowWithOVU />
       <Footer />
-    </div>
+      </div>
+    </>
   );
 }

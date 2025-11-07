@@ -47,15 +47,21 @@ export default function Hero() {
           className="flex items-center justify-center gap-3 mb-6 md:mb-8"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.6, delay: 1.6 }}
         >
-          <Image
-            src="/twemoji_flag-nigeria.png"
-            alt="Nigeria Flag"
-            width={50}
-            height={50}
-            className="w-[40px] h-[40px] md:w-[50px] md:h-[50px]"
-          />
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, delay: 1.7 }}
+          >
+            <Image
+              src="/twemoji_flag-nigeria.png"
+              alt="Nigeria Flag"
+              width={50}
+              height={50}
+              className="w-[40px] h-[40px] md:w-[50px] md:h-[50px]"
+            />
+          </motion.div>
           <div className="relative h-[30px] overflow-hidden flex items-center justify-center min-w-[100px] md:min-w-[150px]">
             <span
               className={`font-manrope text-[22px] md:text-[28px] text-[#464646] transition-all duration-300 ${
@@ -72,7 +78,7 @@ export default function Hero() {
           className="font-poppins font-bold text-[32px] md:text-[52px] lg:text-[68px] text-[#303030] mb-4 max-w-[940px]"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          transition={{ duration: 0.6, delay: 1.8 }}
         >
           One Stop for Flights and Road Trips in Nigeria
         </motion.h1>
@@ -82,7 +88,7 @@ export default function Hero() {
           className="font-manrope text-[14px] md:text-[16px] lg:text-[18px] text-[#464646] max-w-[700px] mb-10 px-4 md:px-6"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
+          transition={{ duration: 0.6, delay: 2.0 }}
         >
           Search, book, and pay for buses and flights, all in one place.
         </motion.p>
@@ -92,7 +98,7 @@ export default function Hero() {
           className="relative w-full max-w-[1600px] aspect-video sm:aspect-3/2 md:aspect-5/3 lg:aspect-16/7 overflow-hidden"
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
+          transition={{ duration: 0.8, delay: 2.2 }}
         >
           {/* Phones */}
           <div className="absolute inset-0 flex justify-center items-end scale-[1] sm:scale-[0.95] md:scale-[1] z-10 pb-[2%] sm:pb-[3%] md:pb-[2%] lg:pb-[4%] h-full md:h-[90%] lg:h-[88%]">
@@ -101,7 +107,7 @@ export default function Hero() {
               className="relative w-[30%] max-w-[260px] sm:max-w-[280px] md:max-w-[320px] lg:max-w-[420px] h-full translate-y-[4%] md:translate-y-[5%] lg:translate-y-[6.4%] -mr-[10%] sm:-mr-[8%] md:-mr-[8%] lg:-mr-[10%]"
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.8 }}
+              transition={{ duration: 0.8, delay: 2.4 }}
             >
               <Image
                 src="/phone_left.png"
@@ -116,7 +122,7 @@ export default function Hero() {
               className="relative w-[40%] max-w-[440px] sm:max-w-[480px] md:max-w-[520px] lg:max-w-[600px] z-10 -translate-y-[12%] sm:-translate-y-[8%] md:-translate-y-[6%] lg:-translate-y-[8%] h-full"
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.9 }}
+              transition={{ duration: 0.8, delay: 2.5 }}
             >
               <Image
                 src="/phone_center.png"
@@ -132,7 +138,7 @@ export default function Hero() {
               className="relative w-[28%] max-w-[260px] sm:max-w-[280px] md:max-w-[320px] lg:max-w-[420px] h-full translate-y-[4%] md:translate-y-[5%] lg:translate-y-[5%] -ml-[10%] sm:-ml-[10%] md:-ml-[10%] lg:-ml-[12%]"
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.8 }}
+              transition={{ duration: 0.8, delay: 2.4 }}
             >
               <Image
                 src="/phone_right.png"

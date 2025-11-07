@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
+import { motion } from 'framer-motion';
 
 export default function Navbar() {
   const [activeSection, setActiveSection] = useState('home');
@@ -44,9 +45,19 @@ export default function Navbar() {
   };
 
   return (
-    <header className="fixed top-0 left-0 w-full bg-white h-[60px] md:h-[100px] xl:h-[150px] flex items-center justify-between px-4 md:px-8 xl:px-16 border-b border-gray-100 z-50">
+    <motion.header
+      className="fixed top-0 left-0 w-full bg-white h-[60px] md:h-[100px] xl:h-[150px] flex items-center justify-between px-4 md:px-8 xl:px-16 border-b border-gray-100 z-50"
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, delay: 1.6 }}
+    >
       {/* Logo */}
-      <Link href="/" className="flex items-center gap-1.5 md:gap-2">
+      <motion.div
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.6, delay: 1.8 }}
+      >
+        <Link href="/" className="flex items-center gap-1.5 md:gap-2">
         <img
           src="/bird.png"
           alt="OVU Logo"
@@ -67,9 +78,13 @@ export default function Navbar() {
           OVU
         </span>
       </Link>
+      </motion.div>
 
       {/* Navigation Links - Show at xl (1280px+) */}
-      <nav
+      <motion.nav
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 2.0 }}
         className="hidden xl:flex items-center justify-start h-[22px]"
         style={{
           flexDirection: 'row',
@@ -90,15 +105,18 @@ export default function Navbar() {
             {link.name}
           </button>
         ))}
-      </nav>
+      </motion.nav>
 
       {/* Join Waitlist Button - Only show on desktop (1280px+) */}
-      <button
+      <motion.button
+        initial={{ opacity: 0, x: 20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.6, delay: 2.2 }}
         onClick={scrollToWaitlist}
         className="hidden xl:block bg-[#0B5B7A] text-white px-8 py-3 rounded-lg text-base font-medium hover:bg-[#094A63] transition-colors cursor-pointer"
       >
         Join Waitlist
-      </button>
-    </header>
+      </motion.button>
+    </motion.header>
   );
 }

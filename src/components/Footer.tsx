@@ -1,8 +1,15 @@
+'use client';
+
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
+import { useInView } from 'framer-motion';
+import { useRef } from 'react';
 
 const Footer = () => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, amount: 0.1 });
   const footerLinks = [
     { name: 'About', href: '#about' },
     { name: 'Careers', href: '#careers' },
@@ -19,12 +26,17 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-[#1A1A1A] text-white">
+    <footer ref={ref} className="bg-[#1A1A1A] text-white">
       {/* Main Footer Content */}
       <div className="w-full px-4 md:px-8 py-12 md:py-16">
         <div className="max-w-[1728px] mx-auto">
           {/* Logo */}
-          <div className="flex justify-center mb-8 md:mb-10">
+          <motion.div
+            className="flex justify-center mb-8 md:mb-10"
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+            transition={{ duration: 0.6 }}
+          >
             <Link href="/" className="flex items-center gap-1.5 md:gap-2">
               <Image 
                 src="/bird.png" 
@@ -46,10 +58,15 @@ const Footer = () => {
                 OVU
               </span>
             </Link>
-          </div>
+          </motion.div>
 
           {/* Navigation Links */}
-          <nav className="flex flex-wrap justify-center items-center gap-4 md:gap-6 lg:gap-8 mb-8 md:mb-10">
+          <motion.nav
+            className="flex flex-wrap justify-center items-center gap-4 md:gap-6 lg:gap-8 mb-8 md:mb-10"
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
             {footerLinks.map((link, index) => (
               <React.Fragment key={link.name}>
                 <Link 
@@ -63,10 +80,15 @@ const Footer = () => {
                 )}
               </React.Fragment>
             ))}
-          </nav>
+          </motion.nav>
 
           {/* Social Media Icons */}
-          <div className="flex justify-center items-center gap-6 md:gap-8 mb-12 md:mb-16">
+          <motion.div
+            className="flex justify-center items-center gap-6 md:gap-8 mb-12 md:mb-16"
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+          >
             {socialLinks.map((social) => (
               <Link 
                 key={social.name}
@@ -99,24 +121,34 @@ const Footer = () => {
                 </div>
               </Link>
             ))}
-          </div>
+          </motion.div>
         </div>
       </div>
 
       {/* Copyright Section */}
-      <div className="w-full bg-[#065888] py-4">
+      <motion.div
+        className="w-full bg-[#065888] py-4"
+        initial={{ opacity: 0 }}
+        animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+        transition={{ duration: 0.6, delay: 0.6 }}
+      >
         <div className="max-w-[1728px] mx-auto px-4 md:px-8">
           <p className="font-manrope font-normal text-[14px] text-white text-center">
             © 2025 OVU Technologies. All rights reserved.
           </p>
         </div>
-      </div>
+      </motion.div>
 
       {/* Designer Credit Section */}
-      <div className="w-full bg-black py-3">
+      <motion.div
+        className="w-full bg-black py-3"
+        initial={{ opacity: 0 }}
+        animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+        transition={{ duration: 0.6, delay: 0.8 }}
+      >
         <div className="max-w-[1728px] mx-auto px-4 md:px-8">
         </div>
-      </div>
+      </motion.div>
     </footer>
   );
 };
