@@ -10,13 +10,48 @@ export default function JoinWaitlist() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [isExistingUser, setIsExistingUser] = useState(false);
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.1 });
 
+  // Email validation function
+  const validateEmail = (email: string): string | null => {
+    const trimmedEmail = email.trim();
+    
+    if (!trimmedEmail) {
+      return 'Email is required';
+    }
+
+    // Email regex pattern
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    
+    if (!emailRegex.test(trimmedEmail)) {
+      return 'Please enter a valid email address';
+    }
+
+    // Check email length
+    if (trimmedEmail.length > 254) {
+      return 'Email address is too long';
+    }
+
+    return null; // Valid email
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsLoading(true);
     setError('');
+    setIsExistingUser(false);
+
+    // Validate email before submitting
+    const trimmedEmail = email.trim();
+    const validationError = validateEmail(trimmedEmail);
+    
+    if (validationError) {
+      setError(validationError);
+      return;
+    }
+
+    setIsLoading(true);
 
     try {
       const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || '';
@@ -26,24 +61,47 @@ export default function JoinWaitlist() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          email,
+          email: trimmedEmail,
           name: '', // Empty name as per requirement
         }),
       });
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.detail || 'Failed to subscribe');
-      }
-
       const data = await response.json();
-      console.log('Subscription successful:', data);
 
-      // Show success modal
-      setShowSuccessModal(true);
+      // Check if user already exists
+      // Common indicators: status code 200/201 with message indicating existing user,
+      // or specific response fields like 'already_exists', 'existing', etc.
+      if (response.ok) {
+        // Check response for existing user indicators
+        const isExisting = 
+          data.message?.toLowerCase().includes('already') ||
+          data.message?.toLowerCase().includes('existing') ||
+          data.status === 'existing' ||
+          data.already_exists === true ||
+          response.status === 200 && data.message?.toLowerCase().includes('already subscribed');
 
-      // Clear email input
-      setEmail('');
+        setIsExistingUser(isExisting || false);
+        setShowSuccessModal(true);
+        setEmail('');
+        setError('');
+      } else {
+        // Handle error responses - check if it's an "already exists" error
+        const errorMessage = data.detail || data.message || 'Failed to subscribe';
+        const isExistingError = 
+          errorMessage.toLowerCase().includes('already') ||
+          errorMessage.toLowerCase().includes('existing') ||
+          errorMessage.toLowerCase().includes('duplicate') ||
+          response.status === 409; // Conflict status often means already exists
+
+        if (isExistingError) {
+          setIsExistingUser(true);
+          setShowSuccessModal(true);
+          setEmail('');
+          setError('');
+        } else {
+          throw new Error(errorMessage);
+        }
+      }
     } catch (err) {
       console.error('Subscription error:', err);
       setError(err instanceof Error ? err.message : 'Something went wrong. Please try again.');
@@ -122,7 +180,11 @@ export default function JoinWaitlist() {
                 type="email"
                 placeholder="Type your E-mail here"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  // Clear error when user starts typing
+                  if (error) setError('');
+                }}
                 className="w-full h-[45px] pl-12 pr-4 rounded-[20px] bg-white text-[#303030] placeholder:text-gray-400 focus:outline-none focus:border-[#065888] transition"
                 required
                 disabled={isLoading}
@@ -153,7 +215,11 @@ export default function JoinWaitlist() {
                 type="email"
                 placeholder="Type your E-mail here"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  // Clear error when user starts typing
+                  if (error) setError('');
+                }}
                 className="w-full h-full pl-12 pr-[120px] rounded-[15px] bg-white text-[#303030] placeholder:text-gray-400 focus:outline-none focus:border-[#065888] transition"
                 style={{ fontFamily: 'var(--font-manrope)' }}
                 required
@@ -195,6 +261,7 @@ export default function JoinWaitlist() {
       <WaitlistSuccessModal
         open={showSuccessModal}
         onOpenChange={setShowSuccessModal}
+        isExistingUser={isExistingUser}
       />
     </section>
   );

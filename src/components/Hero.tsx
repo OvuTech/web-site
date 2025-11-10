@@ -151,26 +151,74 @@ export default function Hero() {
 
           {/* Notifications */}
           {/* Left */}
-          <div className="absolute left-[-16%] sm:left-[15%] top-[1%] sm:top-[2%] flex items-center gap-2 z-20">
+          <div 
+            className="absolute top-[1%] sm:top-[2%] flex items-center gap-2 z-20"
+            style={{
+              left: 'clamp(8px, 2vw, 15%)',
+            }}
+          >
             <div className="text-right leading-tight">
-              <p className="font-manrope font-semibold text-[8px] sm:text-[14px] text-[#303030]">
+              <p 
+                className="font-manrope font-semibold text-[#303030]"
+                style={{
+                  fontSize: 'clamp(8px, 1.5vw, 14px)',
+                }}
+              >
                 1 new notification
               </p>
-              <p className="font-manrope text-[11px] sm:text-[12px] text-[#464646]">
+              <p 
+                className="font-manrope text-[#464646]"
+                style={{
+                  fontSize: 'clamp(9px, 1.3vw, 12px)',
+                }}
+              >
                 Your trip to Enugu has been booked
               </p>
             </div>
-            <Image src="/red_alarm.png" alt="Bell" width={20} height={20} />
+            <Image 
+              src="/red_alarm.png" 
+              alt="Bell" 
+              width={20} 
+              height={20}
+              style={{
+                width: 'clamp(16px, 3vw, 20px)',
+                height: 'clamp(16px, 3vw, 20px)',
+              }}
+            />
           </div>
 
           {/* Right */}
-          <div className="absolute right-[-18%] sm:right-[15%] top-[1%] sm:top-[2%] flex items-center gap-2 z-20">
-            <Image src="/yellow_alarm.png" alt="Bell" width={20} height={20} />
+          <div 
+            className="absolute top-[1%] sm:top-[2%] flex items-center gap-2 z-20"
+            style={{
+              right: 'clamp(8px, 2vw, 15%)',
+            }}
+          >
+            <Image 
+              src="/yellow_alarm.png" 
+              alt="Bell" 
+              width={20} 
+              height={20}
+              style={{
+                width: 'clamp(16px, 3vw, 20px)',
+                height: 'clamp(16px, 3vw, 20px)',
+              }}
+            />
             <div className="leading-tight">
-              <p className="font-manrope font-semibold text-[8px] sm:text-[14px] text-[#303030]">
+              <p 
+                className="font-manrope font-semibold text-[#303030]"
+                style={{
+                  fontSize: 'clamp(8px, 1.5vw, 14px)',
+                }}
+              >
                 1 new notification
               </p>
-              <p className="font-manrope text-[10px] sm:text-[12px] text-[#464646]">
+              <p 
+                className="font-manrope text-[#464646]"
+                style={{
+                  fontSize: 'clamp(9px, 1.3vw, 12px)',
+                }}
+              >
                 Download your ticket for flight MDXC6...
               </p>
             </div>
