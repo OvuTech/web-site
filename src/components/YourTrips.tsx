@@ -28,7 +28,7 @@ export default function YourTrips() {
       scrollPosition += scrollSpeed;
 
       // Get the width of one phone card plus gap
-      const phoneWidth = window.innerWidth >= 1024 ? 540 : window.innerWidth >= 768 ? 280 : 200;
+      const phoneWidth = window.innerWidth >= 1024 ? 540 : window.innerWidth >= 768 ? 280 : 240;
       const gap = window.innerWidth >= 1024 ? 40 : window.innerWidth >= 768 ? 30 : 20;
       const cardWidth = phoneWidth + gap;
 
@@ -53,17 +53,17 @@ export default function YourTrips() {
   }, []);
 
   return (
-    <section className="bg-[#065888] relative lg:mt-[100px] md:mt-[50px] mt-6 pt-12 md:pt-14 lg:pt-16 pb-12 md:pb-14 lg:pb-16 overflow-hidden">
+    <section className="bg-[#065888] relative lg:mt-[100px] md:mt-[50px] mt-6 pt-14 md:pt-14 lg:pt-16 pb-14 md:pb-14 lg:pb-16 overflow-hidden">
       <div className="w-full relative z-10">
         {/* Heading */}
-        <div className="text-center mb-6 md:mb-14 lg:mb-16">
-          <h2 className="font-manjari font-thin text-[22px] md:text-[36px] lg:text-[48px] text-white leading-none tracking-normal" style={{ fontFamily: 'var(--font-manjari)', fontWeight: 100 }}>
+        <div className="text-center mb-8 md:mb-14 lg:mb-16">
+          <h2 className="font-manjari font-thin text-[28px] md:text-[36px] lg:text-[48px] text-white leading-none tracking-normal" style={{ fontFamily: 'var(--font-manjari)', fontWeight: 100 }}>
             Your trips, simplified.
           </h2>
         </div>
 
         {/* Carousel Track */}
-        <div className="relative w-full h-[320px] md:h-[550px] lg:h-[900px] overflow-visible">
+        <div className="relative w-full h-[380px] md:h-[550px] lg:h-[900px] overflow-visible">
           <div
             ref={trackRef}
             className="flex gap-[20px] md:gap-[30px] lg:gap-[40px] absolute left-0"
@@ -77,7 +77,7 @@ export default function YourTrips() {
               return (
                 <div
                   key={index}
-                  className="flex-shrink-0 w-[200px] md:w-[280px] lg:w-[540px] flex items-start"
+                  className="flex-shrink-0 w-[240px] md:w-[280px] lg:w-[540px] flex items-start"
                   style={{
                     marginTop: `${offsetY}px`
                   }}
@@ -87,7 +87,7 @@ export default function YourTrips() {
                     alt={phone.alt}
                     width={545}
                     height={823}
-                    className="w-full h-auto max-h-[300px] md:max-h-[420px] lg:max-h-[820px] object-contain drop-shadow-2xl"
+                    className="w-full h-auto max-h-[360px] md:max-h-[420px] lg:max-h-[820px] object-contain drop-shadow-2xl"
                   />
                 </div>
               );
