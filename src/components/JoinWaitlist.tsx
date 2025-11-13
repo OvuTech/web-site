@@ -4,6 +4,7 @@ import { useState, useRef } from 'react';
 import Image from 'next/image';
 import { motion, useInView } from 'framer-motion';
 import WaitlistSuccessModal from './WaitlistSuccessModal';
+import { api, ApiError } from '@/lib/api';
 
 export default function JoinWaitlist() {
   const [email, setEmail] = useState('');
@@ -54,44 +55,49 @@ export default function JoinWaitlist() {
     setIsLoading(true);
 
     try {
-      const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || '';
-      const response = await fetch(`${apiBaseUrl}/api/v1/waitlist/subscribe`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email: trimmedEmail,
-          name: '', // Empty name as per requirement
-        }),
+      const data = await api.waitlist.subscribe({
+        email: trimmedEmail,
+        name: '', // Empty name as per requirement
       });
 
-      const data = await response.json();
+      // Check if user already exists by comparing created_at timestamp
+      let isExisting = false;
 
-      // Check if user already exists
-      // Common indicators: status code 200/201 with message indicating existing user,
-      // or specific response fields like 'already_exists', 'existing', etc.
-      if (response.ok) {
-        // Check response for existing user indicators
-        const isExisting = 
+      if (data.created_at) {
+        // Parse the UTC timestamp from backend and current UTC time
+        const createdAtUTC = new Date(data.created_at + 'Z'); // Add 'Z' to ensure UTC parsing
+        const nowUTC = new Date();
+
+        // Calculate time difference in seconds
+        const timeDifferenceInSeconds = (nowUTC.getTime() - createdAtUTC.getTime()) / 1000;
+
+        // If created more than 10 seconds ago, they're an existing user
+        // Using 10 seconds as a buffer to account for network delays
+        isExisting = timeDifferenceInSeconds > 10;
+      }
+
+      // Fallback: Also check message-based indicators if created_at is not available
+      if (!data.created_at) {
+        isExisting =
           data.message?.toLowerCase().includes('already') ||
           data.message?.toLowerCase().includes('existing') ||
           data.status === 'existing' ||
-          data.already_exists === true ||
-          response.status === 200 && data.message?.toLowerCase().includes('already subscribed');
+          data.already_exists === true;
+      }
 
-        setIsExistingUser(isExisting || false);
-        setShowSuccessModal(true);
-        setEmail('');
-        setError('');
-      } else {
-        // Handle error responses - check if it's an "already exists" error
-        const errorMessage = data.detail || data.message || 'Failed to subscribe';
-        const isExistingError = 
+      setIsExistingUser(isExisting);
+      setShowSuccessModal(true);
+      setEmail('');
+      setError('');
+    } catch (err) {
+      if (err instanceof ApiError) {
+        // Check if it's an "already exists" error
+        const errorMessage = err.message;
+        const isExistingError =
           errorMessage.toLowerCase().includes('already') ||
           errorMessage.toLowerCase().includes('existing') ||
           errorMessage.toLowerCase().includes('duplicate') ||
-          response.status === 409; // Conflict status often means already exists
+          err.status === 409; // Conflict status often means already exists
 
         if (isExistingError) {
           setIsExistingUser(true);
@@ -99,12 +105,12 @@ export default function JoinWaitlist() {
           setEmail('');
           setError('');
         } else {
-          throw new Error(errorMessage);
+          setError(errorMessage);
         }
+      } else {
+        console.error('Subscription error:', err);
+        setError(err instanceof Error ? err.message : 'Something went wrong. Please try again.');
       }
-    } catch (err) {
-      console.error('Subscription error:', err);
-      setError(err instanceof Error ? err.message : 'Something went wrong. Please try again.');
     } finally {
       setIsLoading(false);
     }

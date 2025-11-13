@@ -3,6 +3,8 @@
 import { useState, useRef } from 'react';
 import Image from 'next/image';
 import { motion, useInView } from 'framer-motion';
+import WaitlistSuccessModal from './WaitlistSuccessModal';
+import { api, ApiError } from '@/lib/api';
 
 interface Feature {
   id: number;
@@ -76,6 +78,10 @@ export default function GrowWithOVU() {
     phone: '',
     email: ''
   });
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [isExistingPartner, setIsExistingPartner] = useState(false);
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.1 });
 
@@ -84,12 +90,149 @@ export default function GrowWithOVU() {
       ...formData,
       [e.target.name]: e.target.value
     });
+    // Clear error when user starts typing
+    if (error) setError('');
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // Email validation function
+  const validateEmail = (email: string): string | null => {
+    const trimmedEmail = email.trim();
+
+    if (!trimmedEmail) {
+      return 'Email is required';
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailRegex.test(trimmedEmail)) {
+      return 'Please enter a valid email address';
+    }
+
+    if (trimmedEmail.length > 254) {
+      return 'Email address is too long';
+    }
+
+    return null;
+  };
+
+  // Phone validation function
+  const validatePhone = (phone: string): string | null => {
+    const trimmedPhone = phone.trim();
+
+    if (!trimmedPhone) {
+      return 'Phone number is required';
+    }
+
+    // Basic phone validation - at least 10 digits
+    const phoneRegex = /^\+?[\d\s-]{10,}$/;
+
+    if (!phoneRegex.test(trimmedPhone)) {
+      return 'Please enter a valid phone number';
+    }
+
+    return null;
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission
-    console.log('Form submitted:', formData);
+    setError('');
+    setIsExistingPartner(false);
+
+    // Validate all fields
+    const trimmedEmail = formData.email.trim();
+    const trimmedPhone = formData.phone.trim();
+    const trimmedCompanyName = formData.companyName.trim();
+
+    if (!trimmedCompanyName) {
+      setError('Company name is required');
+      return;
+    }
+
+    if (!formData.category) {
+      setError('Please select a category');
+      return;
+    }
+
+    const phoneError = validatePhone(trimmedPhone);
+    if (phoneError) {
+      setError(phoneError);
+      return;
+    }
+
+    const emailError = validateEmail(trimmedEmail);
+    if (emailError) {
+      setError(emailError);
+      return;
+    }
+
+    setIsLoading(true);
+
+    try {
+      const data = await api.partnerships.create({
+        company_name: trimmedCompanyName,
+        email: trimmedEmail,
+        phone: trimmedPhone,
+        category: formData.category,
+      });
+
+      // Check if partner already exists using same logic as waitlist
+      let isExisting = false;
+
+      if (data.created_at) {
+        const createdAtUTC = new Date(data.created_at + 'Z');
+        const nowUTC = new Date();
+        const timeDifferenceInSeconds = (nowUTC.getTime() - createdAtUTC.getTime()) / 1000;
+        isExisting = timeDifferenceInSeconds > 10;
+      }
+
+      // Fallback: Check message-based indicators
+      if (!data.created_at) {
+        isExisting =
+          data.message?.toLowerCase().includes('already') ||
+          data.message?.toLowerCase().includes('existing') ||
+          data.status === 'existing' ||
+          data.already_exists === true;
+      }
+
+      setIsExistingPartner(isExisting);
+      setShowSuccessModal(true);
+      setFormData({
+        companyName: '',
+        category: '',
+        phone: '',
+        email: ''
+      });
+      setError('');
+    } catch (err) {
+      if (err instanceof ApiError) {
+        // Check if it's an "already exists" error
+        const errorMessage = err.message;
+        const isExistingError =
+          errorMessage.toLowerCase().includes('already') ||
+          errorMessage.toLowerCase().includes('existing') ||
+          errorMessage.toLowerCase().includes('duplicate') ||
+          err.status === 409;
+
+        if (isExistingError) {
+          setIsExistingPartner(true);
+          setShowSuccessModal(true);
+          setFormData({
+            companyName: '',
+            category: '',
+            phone: '',
+            email: ''
+          });
+          setError('');
+        } else {
+          setError(errorMessage);
+        }
+      } else {
+        console.error('Partnership submission error:', err);
+        setError(err instanceof Error ? err.message : 'Something went wrong. Please try again.');
+      }
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -165,9 +308,10 @@ export default function GrowWithOVU() {
                       value={formData.companyName}
                       onChange={handleChange}
                       placeholder="Type here"
-                      className="w-full md:w-[474px] h-[45px] md:h-[60px] px-4 py-3 rounded-[10px] text-[#303030] placeholder:text-gray-400 focus:outline-none focus:border-[#065888] focus:ring-2 focus:ring-[#065888]/20 transition font-manrope"
+                      className="w-full md:w-[474px] h-[45px] md:h-[60px] px-4 py-3 rounded-[10px] text-[#303030] placeholder:text-gray-400 focus:outline-none focus:border-[#065888] focus:ring-2 focus:ring-[#065888]/20 transition font-manrope disabled:opacity-50 disabled:cursor-not-allowed"
                       style={{ fontFamily: 'var(--font-manrope)', border: '1px solid #B1B1B1', borderWidth: '1px' }}
                       required
+                      disabled={isLoading}
                     />
                   </div>
 
@@ -182,9 +326,10 @@ export default function GrowWithOVU() {
                         name="category"
                         value={formData.category}
                         onChange={handleChange}
-                        className="w-full md:w-[474px] h-[45px] md:h-[60px] px-4 py-3 pr-10 rounded-[10px] text-[#303030] focus:outline-none focus:border-[#065888] focus:ring-2 focus:ring-[#065888]/20 transition font-manrope appearance-none"
+                        className="w-full md:w-[474px] h-[45px] md:h-[60px] px-4 py-3 pr-10 rounded-[10px] text-[#303030] focus:outline-none focus:border-[#065888] focus:ring-2 focus:ring-[#065888]/20 transition font-manrope appearance-none disabled:opacity-50 disabled:cursor-not-allowed"
                         style={{ fontFamily: 'var(--font-manrope)', border: '1px solid #B1B1B1', borderWidth: '1px' }}
                         required
+                        disabled={isLoading}
                       >
                         <option value="">Select category</option>
                         <option value="bus">Bus Operator</option>
@@ -212,9 +357,10 @@ export default function GrowWithOVU() {
                       value={formData.phone}
                       onChange={handleChange}
                       placeholder="+234"
-                      className="w-full md:w-[474px] h-[45px] md:h-[60px] px-4 py-3 rounded-[10px] text-[#303030] placeholder:text-gray-400 focus:outline-none focus:border-[#065888] focus:ring-2 focus:ring-[#065888]/20 transition font-manrope"
+                      className="w-full md:w-[474px] h-[45px] md:h-[60px] px-4 py-3 rounded-[10px] text-[#303030] placeholder:text-gray-400 focus:outline-none focus:border-[#065888] focus:ring-2 focus:ring-[#065888]/20 transition font-manrope disabled:opacity-50 disabled:cursor-not-allowed"
                       style={{ fontFamily: 'var(--font-manrope)', border: '1px solid #B1B1B1', borderWidth: '1px' }}
                       required
+                      disabled={isLoading}
                     />
                   </div>
 
@@ -230,19 +376,26 @@ export default function GrowWithOVU() {
                       value={formData.email}
                       onChange={handleChange}
                       placeholder="example@mail.com"
-                      className="w-full md:w-[474px] h-[45px] md:h-[60px] px-4 py-3 rounded-[10px] text-[#303030] placeholder:text-gray-400 focus:outline-none focus:border-[#065888] focus:ring-2 focus:ring-[#065888]/20 transition font-manrope"
+                      className="w-full md:w-[474px] h-[45px] md:h-[60px] px-4 py-3 rounded-[10px] text-[#303030] placeholder:text-gray-400 focus:outline-none focus:border-[#065888] focus:ring-2 focus:ring-[#065888]/20 transition font-manrope disabled:opacity-50 disabled:cursor-not-allowed"
                       style={{ fontFamily: 'var(--font-manrope)', border: '1px solid #B1B1B1', borderWidth: '1px' }}
                       required
+                      disabled={isLoading}
                     />
                   </div>
+
+                  {/* Error Message */}
+                  {error && (
+                    <p className="text-red-500 text-sm text-center">{error}</p>
+                  )}
 
                   {/* Submit Button */}
                   <button
                     type="submit"
-                    className="w-full h-[50px] md:h-[56px] bg-[#065888] text-white rounded-[10px] font-manrope font-medium text-[16px] md:text-[18px] hover:bg-[#065888]/90 transition shadow-md cursor-pointer"
+                    disabled={isLoading}
+                    className="w-full h-[50px] md:h-[56px] bg-[#065888] text-white rounded-[10px] font-manrope font-medium text-[16px] md:text-[18px] hover:bg-[#065888]/90 transition shadow-md cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                     style={{ fontFamily: 'var(--font-manrope)', fontWeight: 500 }}
                   >
-                    Become a Partner
+                    {isLoading ? 'Submitting...' : 'Become a Partner'}
                   </button>
                 </form>
               </div>
@@ -250,6 +403,14 @@ export default function GrowWithOVU() {
           </div>
         </div>
       </div>
+
+      {/* Success Modal */}
+      <WaitlistSuccessModal
+        open={showSuccessModal}
+        onOpenChange={setShowSuccessModal}
+        isExistingUser={isExistingPartner}
+        type="partnership"
+      />
     </section>
   );
 }
