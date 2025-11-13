@@ -18,11 +18,17 @@ export default function WaitlistSuccessModal({ open, onOpenChange, isExistingUse
   const isPartnership = type === 'partnership';
 
   const handleShare = async () => {
-    const shareData = {
-      title: 'Join OVU Waitlist',
-      text: 'I just joined the waitlist for OVU - Nigeria\'s one-stop platform for flights and road trips! Join me and get early access when we launch.',
-      url: window.location.origin,
-    };
+    const shareData = isPartnership
+      ? {
+          title: 'OVU Partnership',
+          text: 'I just applied to partner with OVU - Nigeria\'s one-stop platform for flights and road trips! Join the growing network of transport operators.',
+          url: window.location.origin,
+        }
+      : {
+          title: 'Join OVU Waitlist',
+          text: 'I just joined the waitlist for OVU - Nigeria\'s one-stop platform for flights and road trips! Join me and get early access when we launch.',
+          url: window.location.origin,
+        };
 
     // Check if Web Share API is supported (works great on mobile)
     if (navigator.share) {
