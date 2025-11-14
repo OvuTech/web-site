@@ -60,46 +60,25 @@ export default function JoinWaitlist() {
         name: '', // Empty name as per requirement
       });
 
-      // Check if user already exists by comparing created_at timestamp
-      let isExisting = false;
-
-      if (data.created_at) {
-        // Parse the UTC timestamp from backend and current UTC time
-        const createdAtUTC = new Date(data.created_at + 'Z'); // Add 'Z' to ensure UTC parsing
-        const nowUTC = new Date();
-
-        // Calculate time difference in seconds
-        const timeDifferenceInSeconds = (nowUTC.getTime() - createdAtUTC.getTime()) / 1000;
-
-        // If created more than 10 seconds ago, they're an existing user
-        // Using 10 seconds as a buffer to account for network delays
-        isExisting = timeDifferenceInSeconds > 10;
-      }
-
-      // Fallback: Also check message-based indicators if created_at is not available
-      if (!data.created_at) {
-        isExisting =
-          data.message?.toLowerCase().includes('already') ||
-          data.message?.toLowerCase().includes('existing') ||
-          data.status === 'existing' ||
-          data.already_exists === true;
-      }
-
-      setIsExistingUser(isExisting);
+      // Success - new subscriber
+      setIsExistingUser(false);
       setShowSuccessModal(true);
       setEmail('');
       setError('');
     } catch (err) {
       if (err instanceof ApiError) {
-        // Check if it's an "already exists" error
+        // Check if it's an "already subscribed" error from backend
         const errorMessage = err.message;
-        const isExistingError =
+        const isAlreadySubscribed =
+          errorMessage.toLowerCase().includes('already subscribed') ||
           errorMessage.toLowerCase().includes('already') ||
           errorMessage.toLowerCase().includes('existing') ||
           errorMessage.toLowerCase().includes('duplicate') ||
-          err.status === 409; // Conflict status often means already exists
+          err.status === 409 || // Conflict status
+          err.status === 400; // Bad request may also indicate already exists
 
-        if (isExistingError) {
+        if (isAlreadySubscribed) {
+          // Show success modal for existing users
           setIsExistingUser(true);
           setShowSuccessModal(true);
           setEmail('');

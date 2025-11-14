@@ -3,6 +3,7 @@
 import { useState, useRef } from 'react';
 import Image from 'next/image';
 import { motion, useInView } from 'framer-motion';
+import { api, ApiError } from '@/lib/api';
 
 interface FAQItem {
   id: number;
@@ -40,11 +41,55 @@ const faqData: FAQItem[] = [
 
 export default function FAQ() {
   const [openId, setOpenId] = useState<number>(1);
+  const [email, setEmail] = useState('');
+  const [question, setQuestion] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState(false);
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.1 });
 
   const toggleFAQ = (id: number) => {
     setOpenId(openId === id ? 0 : id);
+  };
+
+  const handleSubmitQuestion = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError('');
+    setSuccess(false);
+
+    // Basic validation
+    if (!email.trim() || !question.trim()) {
+      setError('Please fill in all fields');
+      return;
+    }
+
+    setIsLoading(true);
+
+    try {
+      await api.questions.submit({
+        email: email.trim(),
+        question: question.trim(),
+        name: '', // Empty name as per requirement
+      });
+
+      // Success
+      setSuccess(true);
+      setEmail('');
+      setQuestion('');
+
+      // Clear success message after 5 seconds
+      setTimeout(() => setSuccess(false), 5000);
+    } catch (err) {
+      if (err instanceof ApiError) {
+        setError(err.message);
+      } else {
+        console.error('Question submission error:', err);
+        setError(err instanceof Error ? err.message : 'Something went wrong. Please try again.');
+      }
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -214,26 +259,63 @@ export default function FAQ() {
                 Ask us, be sure we will respond quickly.
               </p>
 
-              <div className="flex flex-col md:flex-row gap-[10px]">
-                <input 
-                  type="email" 
-                  placeholder="Email" 
-                  className="w-full md:w-auto h-[45px] md:h-auto px-5 py-3 md:py-4 rounded-[10px] bg-[#065888] border border-white/40 text-white placeholder:text-white/70 focus:outline-none focus:border-white transition md:flex-[0.3]"
+              <form onSubmit={handleSubmitQuestion} className="flex flex-col md:flex-row gap-[10px]">
+                <input
+                  type="email"
+                  placeholder="Email"
+                  value={email}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                    if (error) setError('');
+                  }}
+                  disabled={isLoading}
+                  required
+                  className="w-full md:w-auto h-[45px] md:h-auto px-5 py-3 md:py-4 rounded-[10px] bg-[#065888] border border-white/40 text-white placeholder:text-white/70 focus:outline-none focus:border-white transition md:flex-[0.3] disabled:opacity-50"
                 />
-                <textarea 
-                  placeholder="Type your questions here" 
-                  className="w-full md:hidden h-[116px] px-5 py-3 rounded-[6px] bg-[#065888] border border-white/40 text-white placeholder:text-white/70 focus:outline-none focus:border-white transition resize-none"
+                <textarea
+                  placeholder="Type your questions here"
+                  value={question}
+                  onChange={(e) => {
+                    setQuestion(e.target.value);
+                    if (error) setError('');
+                  }}
+                  disabled={isLoading}
+                  required
+                  className="w-full md:hidden h-[116px] px-5 py-3 rounded-[6px] bg-[#065888] border border-white/40 text-white placeholder:text-white/70 focus:outline-none focus:border-white transition resize-none disabled:opacity-50"
                   rows={4}
                 />
-                <input 
-                  type="text" 
-                  placeholder="Type your questions here" 
-                  className="hidden md:block px-5 py-3 md:py-4 rounded-[10px] bg-[#065888] border border-white/40 text-white placeholder:text-white/70 focus:outline-none focus:border-white transition md:flex-1"
+                <input
+                  type="text"
+                  placeholder="Type your questions here"
+                  value={question}
+                  onChange={(e) => {
+                    setQuestion(e.target.value);
+                    if (error) setError('');
+                  }}
+                  disabled={isLoading}
+                  required
+                  className="hidden md:block px-5 py-3 md:py-4 rounded-[10px] bg-[#065888] border border-white/40 text-white placeholder:text-white/70 focus:outline-none focus:border-white transition md:flex-1 disabled:opacity-50"
                 />
-                <button className="w-[111px] md:w-auto h-[40px] md:h-auto bg-black text-white rounded-[10px] font-medium hover:bg-black/90 transition text-center flex items-center justify-center px-[20px] md:px-8 md:py-3 cursor-pointer">
-                  Send
+                <button
+                  type="submit"
+                  disabled={isLoading}
+                  className="w-[111px] md:w-auto h-[40px] md:h-auto bg-black text-white rounded-[10px] font-medium hover:bg-black/90 transition text-center flex items-center justify-center px-[20px] md:px-8 md:py-3 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {isLoading ? 'Sending...' : 'Send'}
                 </button>
-              </div>
+              </form>
+
+              {/* Success/Error Messages */}
+              {success && (
+                <p className="text-white text-sm mt-4 bg-green-500/20 border border-green-300 rounded-lg px-4 py-2">
+                  Thank you! We've received your question and will respond soon.
+                </p>
+              )}
+              {error && (
+                <p className="text-white text-sm mt-4 bg-red-500/20 border border-red-300 rounded-lg px-4 py-2">
+                  {error}
+                </p>
+              )}
             </div>
           </div>
         </div>
