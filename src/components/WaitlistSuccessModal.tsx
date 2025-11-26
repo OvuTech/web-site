@@ -56,7 +56,7 @@ export default function WaitlistSuccessModal({ open, onOpenChange, isExistingUse
     <Dialog.Root open={open} onOpenChange={onOpenChange}>
       <Dialog.Portal>
         <Dialog.Overlay className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50" />
-        <Dialog.Content className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white/30 backdrop-blur-md rounded-[20px] border border-white p-8 md:p-12 w-[90%] max-w-[638px] min-h-[644px] z-50 focus:outline-none flex items-center justify-center">
+        <Dialog.Content className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white/40 backdrop-blur-lg rounded-[20px] border border-white p-8 md:p-12 w-[90%] max-w-[638px] min-h-[644px] z-50 focus:outline-none flex items-center justify-center">
           <VisuallyHidden.Root>
             <Dialog.Title>{isExistingUser ? 'Already on waitlist' : 'Successfully joined waitlist'}</Dialog.Title>
           </VisuallyHidden.Root>
